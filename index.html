@@ -76,9 +76,17 @@
   }
   .tb-top .tagline{
     color:var(--muted);
-    max-width:38ch;
+    max-width:44ch;
     margin-top:14px;
     font-size:15px;
+  }
+  .process-chain{
+    font-family:'Space Mono', monospace;
+    font-size:clamp(11px, 1.9vw, 13px);
+    color:var(--text);
+    letter-spacing:0.01em;
+    white-space:nowrap;
+    margin-top:8px;
   }
   .headshot{
     width:150px; height:150px;
@@ -111,7 +119,7 @@
 
   .tb-fields{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(2, 1fr);
   }
   .tb-field{
     padding:14px 18px;
@@ -125,9 +133,9 @@
   }
   .tb-field .val{font-size:13px; color:var(--text);}
   @media (max-width:640px){
-    .tb-fields{grid-template-columns:repeat(2,1fr);}
-    .tb-field:nth-child(2){border-right:none;}
-    .tb-field{border-bottom:1.5px solid var(--line);}
+    .tb-fields{grid-template-columns:1fr;}
+    .tb-field{border-right:none; border-bottom:1.5px solid var(--line);}
+    .tb-field:last-child{border-bottom:none;}
   }
 
   /* ===== SECTIONS ===== */
@@ -211,11 +219,19 @@
   }
 
   /* media (image / video) slots */
+  .media-caption{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-top:20px;
+    margin-bottom:8px;
+  }
   .media-row{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:14px;
-    margin-top:20px;
   }
   .media-row:has(.media-slot:only-child){
     grid-template-columns:minmax(0, 340px);
@@ -332,22 +348,22 @@
         </div>
         <div>
           <h1>Andrew Liu</h1>
-          <div class="role">Electrical Engineering · Power &amp; Embedded Systems</div>
-          <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and embedded systems — from PCB layout to firmware to the bench testing that proves it works.</p>
+          <div class="role">Electrical Engineering · Power Electronics and PCB Design</div>
+          <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and Printed Circuit Boards. I have gone through multiple full design processes:</p>
+          <div class="process-chain">System Layout → Design → Bench Testing → System Integration.</div>
         </div>
       </div>
       <div class="tb-links">
         <div><span class="lbl">EMAIL</span><br><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
         <div><span class="lbl">PHONE</span><br><span>(626) 347-0378</span></div>
+        <div><span class="lbl">LINKEDIN</span><br><a href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">linkedin.com/in/andrew-liu</a></div>
         <div><span class="lbl">LINKS</span><br><a href="https://linktr.ee/andrewliu0116" target="_blank" rel="noopener">linktr.ee/andrewliu0116</a></div>
         <div><span class="lbl">RESUME</span><br><a href="resume.pdf" target="_blank" rel="noopener">Download PDF</a></div>
       </div>
     </div>
     <div class="tb-fields">
-      <div class="tb-field"><span class="lbl">Drawn By</span><span class="val">A. Liu</span></div>
       <div class="tb-field"><span class="lbl">School</span><span class="val">UCSB · Class of 2028</span></div>
       <div class="tb-field"><span class="lbl">GPA</span><span class="val">3.98 / 4.00</span></div>
-      <div class="tb-field"><span class="lbl">Rev</span><span class="val">2026.1</span></div>
     </div>
   </header>
 
@@ -358,25 +374,19 @@
     </div>
     <div class="trace-rule"></div>
 
-    <div class="card redacted">
-      <span class="stamp">NDA</span>
+    <div class="card">
       <div class="card-head">
         <div>
           <div class="card-id">SCH-01 · POWER ELECTRONICS · HOPLYNK</div>
-          <h3>Power Distribution &amp; Battery Monitoring PCB</h3>
+          <h3>Electrical Engineering Intern</h3>
         </div>
       </div>
       <div class="card-body">
-        <p>Designed and debugged a power distribution and battery monitoring PCB, with careful attention to keeping EMI from high-power switching sections away from sensitive analog circuitry. Ran LTspice simulations to model battery charge/discharge behavior and catch failure points before they hit the bench, then assembled and tested boards with a DMM and vendor test software.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Full schematics and part numbers are under NDA — swap this paragraph for whatever you're comfortable sharing publicly (the problem, your role, a tradeoff you made), and save the specifics for interviews.
-        </p>
+        <p>As an intern at Hoplynk, a young startup, I took full ownership of a Power Distribution and Battery Monitoring PCB — from initial whiteboard design through schematics, testing, and integration into a real product. Being trusted to own something startup-critical, end-to-end, as an intern pushed me to think like a full-time engineer, not just execute assigned tasks.</p>
         <table class="spec-table">
-          <tr><td>Role</td><td>Electrical Engineering Intern, June 2026 – Present</td></tr>
-          <tr><td>Simulation</td><td>LTspice — charge/discharge modeling, failure point analysis</td></tr>
+          <tr><td>Dates</td><td>June 2026 – September 2026</td></tr>
+          <tr><td>Simulation</td><td>LTspice — battery charge/discharge modeling, failure point analysis</td></tr>
           <tr><td>Test</td><td>DMM, vendor test software, radio hardware validation</td></tr>
-          <tr><td>Details</td><td class="blur-line"></td></tr>
         </table>
       </div>
     </div>
@@ -389,11 +399,7 @@
         </div>
       </div>
       <div class="card-body">
-        <p>Lead electrical decisions for the team's avionics stack — selecting connectors for MCU-to-sensor links by reading blueprints and datasheets, verifying components and sensor functionality on the bench, and documenting test protocols so the team has a shared reference instead of tribal knowledge.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Say more here — team size, a specific connector/sensor decision you made and why, or a test protocol you wrote that the team still uses.
-        </p>
+        <p>Lead electrical decisions for the team's avionics stack, from designing data acquisition systems to coordinating sensor and component testing. Write up design decisions and testing protocols so the team has a clear reference to build from.</p>
         <table class="spec-table">
           <tr><td>Role</td><td>Team Lead, January 2026 – Present</td></tr>
         </table>
@@ -417,18 +423,21 @@
       <div class="card-body">
         <p>Designed a 4-layer PCB in KiCad to log temperature, pressure, and acceleration data during rocket flight, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier — on breakout boards before committing to the layout.</p>
         <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Currently building V2 to optimize the design — swap this in for what's actually changing: size, power budget, sensor count, layout fixes from V1 testing, etc.
+          <span class="edit-tag">Updates</span>
+          Currently building V2 to optimize the design and add live telemetry calculation and streaming capabilities.
         </p>
         <table class="spec-table">
           <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in progress</td></tr>
-          <tr><td>Tools</td><td>KiCad, 4-layer PCB</td></tr>
-          <tr><td>Sensors</td><td>Temperature, pressure, acceleration; thermocouple amplifier</td></tr>
+          <tr><td>Tools</td><td>KiCad, DMM, Soldering Iron</td></tr>
         </table>
+        <div class="media-caption">V1</div>
         <div class="media-row">
           <div class="media-slot">
             <img src="images/sensor-logger.jpg" alt="Rocket flight sensor logger PCB">
           </div>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/Gaucho-Rocket-Project/Altaris_MCU" target="_blank" rel="noopener">GitHub repo →</a>
         </div>
       </div>
     </div>
@@ -441,16 +450,16 @@
         </div>
       </div>
       <div class="card-body">
-        <p>Designed and prototyped a 5V-to-12V boost converter circuit, reaching roughly 66% efficiency, with pulse-width-modulation control and closed-loop voltage feedback implemented on Arduino/ATtiny. Laid out the PCB with trace-width calculations and component placement driven by the power path.</p>
+        <p>Designed and prototyped a 5V-to-12V boost converter circuit, reaching roughly 66% efficiency, with pulse-width-modulation control and closed-loop voltage feedback implemented on Arduino/ATtiny. Output was adjustable through a potentiometer-ADC interface, which triggered output voltage and duty cycle changes. Laid out the PCB with trace-width calculations and component placement driven by the power path.</p>
         <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Say what limited efficiency to ~66% and what you'd change next time — that's the part that shows engineering judgment, not just the result.
+          <span class="edit-tag">Notes</span>
+          Efficiency was capped by switching losses and the asynchronous topology — the diode's high forward-voltage drop was the main culprit. A synchronous design would fix this: swap the diode for a MOSFET driven by the complement of the existing gate signal, cutting conduction losses significantly.
         </p>
         <table class="spec-table">
           <tr><td>Timeline</td><td>March 2026 – April 2026</td></tr>
           <tr><td>Result</td><td>5V → 12V, ~66% efficiency</td></tr>
           <tr><td>Control</td><td>PWM, closed-loop voltage feedback, Arduino/ATtiny</td></tr>
-          <tr><td>Tools</td><td>KiCad, soldering</td></tr>
+          <tr><td>Tools</td><td>KiCad, LTspice, soldering</td></tr>
         </table>
         <div class="media-row">
           <div class="media-slot">
@@ -458,7 +467,7 @@
           </div>
         </div>
         <div class="card-links">
-          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+          <a href="https://www.youtube.com/watch?v=zFqyGcPRrz8" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -472,21 +481,12 @@
       </div>
       <div class="card-body">
         <p>Built at the Santa Barbara Hackathon: a website that screens for plantar fasciitis risk by modeling ankle, knee, and heel joints in vector space using MediaPipe, then flagging risk against a 5-degree threshold benchmark developed for the project.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Add your specific role if this was a team project, and how you landed on the 5-degree threshold.
-        </p>
         <table class="spec-table">
           <tr><td>Timeline</td><td>January 2026</td></tr>
           <tr><td>Stack</td><td>JavaScript, MediaPipe</td></tr>
         </table>
-        <div class="media-row">
-          <div class="media-slot">
-            <img src="images/hackathon.jpg" alt="Plantar fasciitis risk screening website">
-          </div>
-        </div>
         <div class="card-links">
-          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+          <a href="https://www.youtube.com/watch?v=mkpbdPQQUFs" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -500,10 +500,6 @@
       </div>
       <div class="card-body">
         <p>Designed and built a remote-controlled car around a microcontroller, programming motor control, steering, and wireless communication in the Arduino IDE, and using CAD plus 3D printing to design a custom chassis for mounting the electronics.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Mention what was hardest to get working — the wireless link, the motor driver, or the chassis fit — and how you solved it.
-        </p>
         <table class="spec-table">
           <tr><td>Timeline</td><td>August 2025 – September 2025</td></tr>
           <tr><td>Stack</td><td>Arduino IDE, C++, CAD, 3D printing</td></tr>
@@ -514,7 +510,7 @@
           </div>
         </div>
         <div class="card-links">
-          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+          <a href="https://www.youtube.com/shorts/5oEjbVs83oo" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -528,76 +524,27 @@
       </div>
       <div class="card-body">
         <p>Designed and tested a rock-paper-scissors simulator with classmates using an Arduino kit. Flex sensors sewn into a glove detect the wearer's hand shape to register their move against the computer, with results shown live on an LCD.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Add your own description</span>
-          Say more about the flex sensor calibration or the win-detection logic — what made reading the glove reliably harder than it sounds.
-        </p>
         <table class="spec-table">
           <tr><td>Timeline</td><td>February 2025 – March 2025</td></tr>
           <tr><td>Affiliation</td><td>UC Santa Barbara</td></tr>
           <tr><td>Stack</td><td>Arduino, flex sensors, LCD display</td></tr>
           <tr><td>My role</td><td>Learned the components needed for the build and built the circuit during team sessions</td></tr>
         </table>
-        <div class="media-row">
-          <div class="media-slot">
-            <img src="images/rps-simulator.jpg" alt="Arduino rock paper scissors simulator">
-          </div>
+        <div class="card-links">
+          <a href="https://www.youtube.com/shorts/SRnzWEXAwfs" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
 
   </section>
 
-  <section id="skills">
-    <div class="section-head">
-      <span class="tag">03</span>
-      <h2>Skills</h2>
-    </div>
-    <div class="trace-rule"></div>
-
-    <div class="tray-group">
-      <span class="lbl">Design &amp; Simulation</span>
-      <div class="chips">
-        <div class="chip">KiCad</div>
-        <div class="chip">LTspice</div>
-        <div class="chip">Analog &amp; digital circuit analysis</div>
-        <div class="chip">Datasheets</div>
-      </div>
-    </div>
-    <div class="tray-group">
-      <span class="lbl">Software</span>
-      <div class="chips">
-        <div class="chip">C++</div>
-        <div class="chip">Python</div>
-        <div class="chip">Arduino IDE</div>
-      </div>
-    </div>
-    <div class="tray-group">
-      <span class="lbl">Bench &amp; Test</span>
-      <div class="chips">
-        <div class="chip">Oscilloscope</div>
-        <div class="chip">Multimeter</div>
-        <div class="chip">Function generator</div>
-        <div class="chip">Circuit prototyping &amp; debugging</div>
-      </div>
-    </div>
-    <div class="tray-group">
-      <span class="lbl">Fabrication</span>
-      <div class="chips">
-        <div class="chip">Soldering</div>
-        <div class="chip">PCB design (KiCad)</div>
-        <div class="chip">CAD / 3D printing</div>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <div class="lbl">Let's talk</div>
     <div class="links">
       <a href="mailto:andrewliu0116@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://linktr.ee/andrewliu0116" target="_blank" rel="noopener">Linktree</a>
     </div>
-    <div class="rev">SHEET 1/1 — REV 2026.1</div>
   </footer>
 
 </div>
