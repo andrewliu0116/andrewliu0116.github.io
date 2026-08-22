@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selina — Electrical Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0b;
+    --bg-alt:#10140f;
+    --bg-card:#12160f;
+    --line:#243026;
+    --copper:#c17a4a;
+    --trace:#4fa89c;
+    --text:#e9e6dd;
+    --muted:#8b9089;
+    --danger:#b3543f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'Space Mono', monospace;}
+  a{color:var(--trace); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--trace); outline-offset:3px;}
+
+  .sheet{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* faint grid backdrop, like schematic paper */
+  body{
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:40px 40px;
+    background-attachment:fixed;
+    background-position:-1px -1px;
+  }
+  @media (max-width:640px){
+    body{background-size:28px 28px;}
+  }
+
+  /* ===== TITLE BLOCK HERO ===== */
+  header.titleblock{
+    border:1.5px solid var(--line);
+    background:var(--bg-alt);
+    margin:32px auto 40px;
+  }
+  .tb-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:36px 32px 28px;
+    border-bottom:1.5px solid var(--line);
+    gap:24px; flex-wrap:wrap;
+  }
+  .tb-top h1{
+    font-family:'Space Mono', monospace;
+    font-size:clamp(28px, 5vw, 44px);
+    letter-spacing:-0.02em;
+    font-weight:700;
+  }
+  .tb-top .role{
+    color:var(--copper);
+    font-family:'Space Mono', monospace;
+    font-size:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-top:8px;
+  }
+  .tb-top .tagline{
+    color:var(--muted);
+    max-width:38ch;
+    margin-top:14px;
+    font-size:15px;
+  }
+  .tb-links{
+    display:flex; flex-direction:column; gap:8px;
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    min-width:180px;
+  }
+  .tb-links a{color:var(--text);}
+  .tb-links a:hover{color:var(--trace);}
+  .tb-links .lbl{color:var(--muted); font-size:11px; letter-spacing:0.05em;}
+
+  .tb-fields{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+  }
+  .tb-field{
+    padding:14px 18px;
+    border-right:1.5px solid var(--line);
+    font-family:'Space Mono', monospace;
+  }
+  .tb-field:last-child{border-right:none;}
+  .tb-field .lbl{
+    display:block; font-size:10px; letter-spacing:0.1em;
+    color:var(--muted); text-transform:uppercase; margin-bottom:4px;
+  }
+  .tb-field .val{font-size:13px; color:var(--text);}
+  @media (max-width:640px){
+    .tb-fields{grid-template-columns:repeat(2,1fr);}
+    .tb-field:nth-child(2){border-right:none;}
+    .tb-field{border-bottom:1.5px solid var(--line);}
+  }
+
+  /* ===== SECTIONS ===== */
+  section{padding:56px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:28px;
+  }
+  .section-head .tag{
+    font-family:'Space Mono', monospace;
+    font-size:12px; color:var(--copper);
+    border:1px solid var(--copper);
+    padding:3px 8px;
+    letter-spacing:0.05em;
+  }
+  .section-head h2{
+    font-family:'Space Mono', monospace;
+    font-size:22px;
+    letter-spacing:-0.01em;
+  }
+  .trace-rule{
+    height:2px;
+    background:
+      linear-gradient(90deg, var(--line) 0 8px, transparent 8px 12px) repeat-x;
+    background-size:12px 2px;
+    margin:8px 0 40px;
+  }
+
+  p.lead{color:var(--muted); max-width:60ch; font-size:15.5px;}
+
+  /* ===== PROJECT CARD ===== */
+  .card{
+    border:1.5px solid var(--line);
+    background:var(--bg-card);
+    margin-bottom:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:24px 28px 0;
+    gap:16px; flex-wrap:wrap;
+  }
+  .card-id{
+    font-family:'Space Mono', monospace;
+    font-size:12px; color:var(--trace);
+    letter-spacing:0.08em;
+  }
+  .card h3{
+    font-size:21px; font-weight:700; margin-top:6px;
+  }
+  .card-body{padding:16px 28px 28px;}
+  .card-body p{color:var(--muted); font-size:15px; max-width:64ch;}
+  .card-body p + p{margin-top:12px;}
+
+  .spec-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+  }
+  .spec-table tr{border-top:1px solid var(--line);}
+  .spec-table tr:first-child{border-top:none;}
+  .spec-table td{padding:8px 0; vertical-align:top;}
+  .spec-table td:first-child{
+    color:var(--muted); width:130px; letter-spacing:0.04em; text-transform:uppercase; font-size:11px; padding-top:10px;
+  }
+  .spec-table td:last-child{color:var(--text);}
+
+  .card-links{margin-top:20px; display:flex; gap:20px; font-family:'Space Mono', monospace; font-size:13px;}
+
+  /* redacted / NDA card treatment */
+  .card.redacted .card-body p.blur-line{
+    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 10px);
+    height:11px; border-radius:2px; margin:8px 0;
+  }
+  .stamp{
+    position:absolute;
+    top:22px; right:-38px;
+    background:transparent;
+    border:2.5px solid var(--danger);
+    color:var(--danger);
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.12em;
+    padding:5px 44px;
+    transform:rotate(8deg);
+    opacity:0.85;
+  }
+
+  /* ===== SKILLS / PARTS TRAY ===== */
+  .tray-group{margin-bottom:24px;}
+  .tray-group .lbl{
+    font-family:'Space Mono', monospace;
+    font-size:11px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.08em;
+    margin-bottom:10px; display:block;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:1px solid var(--line);
+    background:var(--bg-alt);
+    padding:6px 12px;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    color:var(--text);
+  }
+
+  /* ===== FOOTER TITLE BLOCK ===== */
+  footer{
+    border:1.5px solid var(--line);
+    background:var(--bg-alt);
+    margin:40px auto 60px;
+    padding:32px;
+    text-align:center;
+  }
+  footer .lbl{
+    font-family:'Space Mono', monospace; font-size:11px;
+    color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;
+    margin-bottom:12px;
+  }
+  footer .links{
+    display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
+    font-family:'Space Mono', monospace; font-size:14px;
+  }
+  footer .rev{margin-top:24px; color:var(--muted); font-size:11px; font-family:'Space Mono', monospace;}
+
+  ::selection{background:var(--copper); color:var(--bg);}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <header class="titleblock">
+    <div class="tb-top">
+      <div>
+        <h1>Selina</h1>
+        <div class="role">Electrical Engineering · Power &amp; Embedded Systems</div>
+        <p class="tagline">I design and build power electronics and firmware for real hardware — from battery-monitored power boards to sensor systems that survive a rocket hot-fire.</p>
+      </div>
+      <div class="tb-links">
+        <div><span class="lbl">EMAIL</span><br><a href="mailto:youremail@example.com">youremail@example.com</a></div>
+        <div><span class="lbl">GITHUB</span><br><a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></div>
+        <div><span class="lbl">RESUME</span><br><a href="resume.pdf" target="_blank" rel="noopener">Download PDF</a></div>
+      </div>
+    </div>
+    <div class="tb-fields">
+      <div class="tb-field"><span class="lbl">Drawn By</span><span class="val">S.</span></div>
+      <div class="tb-field"><span class="lbl">Focus</span><span class="val">Power Electronics</span></div>
+      <div class="tb-field"><span class="lbl">Status</span><span class="val">Seeking Internship</span></div>
+      <div class="tb-field"><span class="lbl">Rev</span><span class="val">2026.1</span></div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="trace-rule"></div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-id">SCH-01 · DATA ACQUISITION</div>
+          <h3>Rocketry Hot-Fire DAQ System</h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Built a data acquisition system from scratch to capture temperature and pressure data during a rocket engine hot-fire test. Everything — sensor interfacing, signal conditioning, and logging — had to survive a short, high-stakes test window with zero room for a second take.</p>
+        <p>The hardest part wasn't any single sensor — it was making four different signal types (thermocouple, 4-20mA current loop, digital storage) play nicely on one microcontroller without corrupting each other's readings under real test conditions.</p>
+        <table class="spec-table">
+          <tr><td>Controller</td><td>ESP32</td></tr>
+          <tr><td>Sensors</td><td>MAX31855 thermocouple amplifiers, 4–20mA pressure transducers</td></tr>
+          <tr><td>Logging</td><td>microSD card, timestamped CSV</td></tr>
+          <tr><td>Skills</td><td>Signal conditioning, embedded C, sensor calibration, real-time logging under test constraints</td></tr>
+        </table>
+        <div class="card-links">
+          <a href="#">View writeup →</a>
+          <a href="#">GitHub repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card redacted">
+      <span class="stamp">NDA</span>
+      <div class="card-head">
+        <div>
+          <div class="card-id">SCH-02 · POWER ELECTRONICS</div>
+          <h3>Multi-Cell Power Distribution &amp; Battery Monitoring PCB</h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Designed a power distribution and battery monitoring board for a four-cell parallel LiPo system, including the charge path, discharge protection, and firmware for real-time monitoring — plus a Python dashboard for live coulomb-counting telemetry.</p>
+        <p>Full schematics and part numbers are under an active NDA with the company. Happy to speak to specific design decisions, tradeoffs, and debugging process in an interview.</p>
+        <table class="spec-table">
+          <tr><td>Scope</td><td>Charge path design, discharge protection logic, 4-cell battery monitoring</td></tr>
+          <tr><td>Firmware</td><td>STM32, real-time cell voltage/current monitoring</td></tr>
+          <tr><td>Tooling</td><td>Python serial dashboard, coulomb counting</td></tr>
+          <tr><td>Details</td><td class="blur-line"></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="trace-rule"></div>
+
+    <div class="tray-group">
+      <span class="lbl">Design &amp; Layout</span>
+      <div class="chips">
+        <div class="chip">KiCad</div>
+        <div class="chip">Schematic capture</div>
+        <div class="chip">PCB layout</div>
+        <div class="chip">Datasheet verification</div>
+      </div>
+    </div>
+    <div class="tray-group">
+      <span class="lbl">Firmware &amp; Software</span>
+      <div class="chips">
+        <div class="chip">C / Embedded C</div>
+        <div class="chip">STM32</div>
+        <div class="chip">ESP32</div>
+        <div class="chip">Python</div>
+      </div>
+    </div>
+    <div class="tray-group">
+      <span class="lbl">Power Electronics</span>
+      <div class="chips">
+        <div class="chip">Battery management</div>
+        <div class="chip">Charge / discharge paths</div>
+        <div class="chip">Buck-boost regulation</div>
+        <div class="chip">Signal conditioning</div>
+      </div>
+    </div>
+    <div class="tray-group">
+      <span class="lbl">Hands-On</span>
+      <div class="chips">
+        <div class="chip">Soldering / rework</div>
+        <div class="chip">Bench debugging</div>
+        <div class="chip">Test &amp; validation</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="lbl">Let's talk</div>
+    <div class="links">
+      <a href="mailto:youremail@example.com">Email</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="rev">SHEET 1/1 — REV 2026.1</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
