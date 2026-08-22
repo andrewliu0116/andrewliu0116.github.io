@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0d0b;
-    --bg-alt:#10140f;
-    --bg-card:#12160f;
-    --line:#2e3d31;
-    --copper:#d68a5a;
-    --trace:#5fc0b3;
-    --text:#f2f0e8;
-    --muted:#aab0a3;
-    --danger:#c9634b;
+    --bg:#ece8db;
+    --bg-alt:#f8f6ef;
+    --bg-card:#ffffff;
+    --line:#cdc9ba;
+    --copper:#bd5f2c;
+    --trace:#1f7a6c;
+    --text:#211f18;
+    --muted:#615c4d;
+    --danger:#b23a24;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -80,6 +80,25 @@
     margin-top:14px;
     font-size:15px;
   }
+  .headshot{
+    width:150px; height:150px;
+    border:1.5px solid var(--line);
+    background:var(--bg-card);
+    flex-shrink:0;
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .headshot img{width:100%; height:100%; object-fit:cover; display:block;}
+  .headshot .placeholder-txt{
+    font-family:'Space Mono', monospace;
+    font-size:10px; color:var(--muted); text-align:center; padding:8px;
+    letter-spacing:0.03em;
+  }
+  @media (max-width:640px){
+    .headshot{width:100px; height:100px;}
+  }
+  .tb-name-row{display:flex; gap:20px; align-items:flex-start;}
+
   .tb-links{
     display:flex; flex-direction:column; gap:8px;
     font-family:'Space Mono', monospace;
@@ -198,6 +217,9 @@
     gap:14px;
     margin-top:20px;
   }
+  .media-row:has(.media-slot:only-child){
+    grid-template-columns:minmax(0, 340px);
+  }
   @media (max-width:640px){
     .media-row{grid-template-columns:1fr;}
   }
@@ -304,10 +326,15 @@
 
   <header class="titleblock">
     <div class="tb-top">
-      <div>
-        <h1>Andrew Liu</h1>
-        <div class="role">Electrical Engineering · Power &amp; Embedded Systems</div>
-        <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and embedded systems — from PCB layout to firmware to the bench testing that proves it works.</p>
+      <div class="tb-name-row">
+        <div class="headshot">
+          <div class="placeholder-txt">HEADSHOT<br>Replace with:<br>&lt;img src="images/headshot.jpg"&gt;</div>
+        </div>
+        <div>
+          <h1>Andrew Liu</h1>
+          <div class="role">Electrical Engineering · Power &amp; Embedded Systems</div>
+          <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and embedded systems — from PCB layout to firmware to the bench testing that proves it works.</p>
+        </div>
       </div>
       <div class="tb-links">
         <div><span class="lbl">EMAIL</span><br><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
@@ -429,9 +456,9 @@
           <div class="media-slot">
             <div class="placeholder-txt">IMAGE<br>Replace with:<br>&lt;img src="images/boost-converter.jpg"&gt;</div>
           </div>
-          <div class="media-slot">
-            <div class="placeholder-txt">VIDEO<br>Replace with:<br>&lt;video controls src="videos/boost-converter.mp4"&gt;&lt;/video&gt;</div>
-          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -457,9 +484,9 @@
           <div class="media-slot">
             <div class="placeholder-txt">IMAGE<br>Replace with:<br>&lt;img src="images/hackathon.jpg"&gt;</div>
           </div>
-          <div class="media-slot">
-            <div class="placeholder-txt">VIDEO<br>Replace with:<br>&lt;video controls src="videos/hackathon.mp4"&gt;&lt;/video&gt;</div>
-          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -485,8 +512,35 @@
           <div class="media-slot">
             <div class="placeholder-txt">IMAGE<br>Replace with:<br>&lt;img src="images/rc-car.jpg"&gt;</div>
           </div>
+        </div>
+        <div class="card-links">
+          <a href="https://youtube.com/YOUR-VIDEO-LINK" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-id">SCH-07 · EMBEDDED SYSTEMS · UCSB</div>
+          <h3>Arduino Rock Paper Scissors Simulator</h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Designed and tested a rock-paper-scissors simulator with classmates using an Arduino kit. Flex sensors sewn into a glove detect the wearer's hand shape to register their move against the computer, with results shown live on an LCD.</p>
+        <p class="desc-edit">
+          <span class="edit-tag">Add your own description</span>
+          Say more about the flex sensor calibration or the win-detection logic — what made reading the glove reliably harder than it sounds.
+        </p>
+        <table class="spec-table">
+          <tr><td>Timeline</td><td>February 2025 – March 2025</td></tr>
+          <tr><td>Affiliation</td><td>UC Santa Barbara</td></tr>
+          <tr><td>Stack</td><td>Arduino, flex sensors, LCD display</td></tr>
+          <tr><td>My role</td><td>Learned the components needed for the build and built the circuit during team sessions</td></tr>
+        </table>
+        <div class="media-row">
           <div class="media-slot">
-            <div class="placeholder-txt">VIDEO<br>Replace with:<br>&lt;video controls src="videos/rc-car.mp4"&gt;&lt;/video&gt;</div>
+            <div class="placeholder-txt">IMAGE<br>Replace with:<br>&lt;img src="images/rps-simulator.jpg"&gt;</div>
           </div>
         </div>
       </div>
