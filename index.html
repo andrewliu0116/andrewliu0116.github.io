@@ -60,6 +60,12 @@
     border-bottom:1.5px solid var(--line);
     gap:24px; flex-wrap:wrap;
   }
+  .greeting{
+    font-size:14.5px;
+    color:var(--copper);
+    font-weight:500;
+    margin-bottom:6px;
+  }
   .tb-top h1{
     font-family:'Space Mono', monospace;
     font-size:clamp(28px, 5vw, 44px);
@@ -96,7 +102,7 @@
     overflow:hidden;
     display:flex; align-items:center; justify-content:center;
   }
-  .headshot img{width:100%; height:100%; object-fit:contain; display:block;}
+  .headshot img{width:100%; height:100%; object-fit:cover; display:block;}
   .headshot .placeholder-txt{
     font-family:'Space Mono', monospace;
     font-size:10px; color:var(--muted); text-align:center; padding:8px;
@@ -239,6 +245,24 @@
   @media (max-width:640px){
     .media-row{grid-template-columns:1fr;}
   }
+  .card-split{
+    display:grid;
+    grid-template-columns:1fr 280px;
+    gap:28px;
+    align-items:start;
+  }
+  @media (max-width:700px){
+    .card-split{grid-template-columns:1fr;}
+  }
+  .card-media-col img{
+    width:100%;
+    height:auto;
+    display:block;
+    border:1.5px solid var(--line);
+    background:var(--bg-alt);
+  }
+  .card-media-col .media-caption{margin-top:0;}
+
   .media-slot{
     border:1.5px dashed var(--line);
     background:var(--bg-alt);
@@ -347,6 +371,7 @@
           <img src="images/headshot.jpg" alt="Andrew Liu">
         </div>
         <div>
+          <div class="greeting">Hi, thanks for stopping by 👋</div>
           <h1>Andrew Liu</h1>
           <div class="role">Electrical Engineering · Power Electronics and PCB Design</div>
           <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and Printed Circuit Boards. I have gone through multiple full design processes:</p>
@@ -421,23 +446,25 @@
         <span class="badge">V2 In Progress</span>
       </div>
       <div class="card-body">
-        <p>Designed a 4-layer PCB in KiCad to log temperature, pressure, and acceleration data during rocket flight, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier — on breakout boards before committing to the layout.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Updates</span>
-          Currently building V2 to optimize the design and add live telemetry calculation and streaming capabilities.
-        </p>
-        <table class="spec-table">
-          <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in progress</td></tr>
-          <tr><td>Tools</td><td>KiCad, DMM, Soldering Iron</td></tr>
-        </table>
-        <div class="media-caption">V1</div>
-        <div class="media-row">
-          <div class="media-slot">
+        <div class="card-split">
+          <div>
+            <p>Designed a 4-layer PCB in KiCad to log temperature, pressure, and acceleration data during rocket flight, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier — on breakout boards before committing to the layout.</p>
+            <p class="desc-edit">
+              <span class="edit-tag">Updates</span>
+              Currently building V2 to optimize the design and add live telemetry calculation and streaming capabilities.
+            </p>
+            <table class="spec-table">
+              <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in progress</td></tr>
+              <tr><td>Tools</td><td>KiCad, DMM, Soldering Iron</td></tr>
+            </table>
+            <div class="card-links">
+              <a href="https://github.com/Gaucho-Rocket-Project/Altaris_MCU" target="_blank" rel="noopener">GitHub repo →</a>
+            </div>
+          </div>
+          <div class="card-media-col">
+            <div class="media-caption">V1</div>
             <img src="images/sensor-logger.jpg" alt="Rocket flight sensor logger PCB">
           </div>
-        </div>
-        <div class="card-links">
-          <a href="https://github.com/Gaucho-Rocket-Project/Altaris_MCU" target="_blank" rel="noopener">GitHub repo →</a>
         </div>
       </div>
     </div>
@@ -450,24 +477,26 @@
         </div>
       </div>
       <div class="card-body">
-        <p>Designed and prototyped a 5V-to-12V boost converter circuit, reaching roughly 66% efficiency, with pulse-width-modulation control and closed-loop voltage feedback implemented on Arduino/ATtiny. Output was adjustable through a potentiometer-ADC interface, which triggered output voltage and duty cycle changes. Laid out the PCB with trace-width calculations and component placement driven by the power path.</p>
-        <p class="desc-edit">
-          <span class="edit-tag">Notes</span>
-          Efficiency was capped by switching losses and the asynchronous topology — the diode's high forward-voltage drop was the main culprit. A synchronous design would fix this: swap the diode for a MOSFET driven by the complement of the existing gate signal, cutting conduction losses significantly.
-        </p>
-        <table class="spec-table">
-          <tr><td>Timeline</td><td>March 2026 – April 2026</td></tr>
-          <tr><td>Result</td><td>5V → 12V, ~66% efficiency</td></tr>
-          <tr><td>Control</td><td>PWM, closed-loop voltage feedback, Arduino/ATtiny</td></tr>
-          <tr><td>Tools</td><td>KiCad, LTspice, soldering</td></tr>
-        </table>
-        <div class="media-row">
-          <div class="media-slot">
+        <div class="card-split">
+          <div>
+            <p>Designed and prototyped a 5V-to-12V boost converter circuit, reaching roughly 66% efficiency, with pulse-width-modulation control and closed-loop voltage feedback implemented on Arduino/ATtiny. Output was adjustable through a potentiometer-ADC interface, which triggered output voltage and duty cycle changes. Laid out the PCB with trace-width calculations and component placement driven by the power path.</p>
+            <p class="desc-edit">
+              <span class="edit-tag">Notes</span>
+              Efficiency was capped by switching losses and the asynchronous topology — the diode's high forward-voltage drop was the main culprit. A synchronous design would fix this: swap the diode for a MOSFET driven by the complement of the existing gate signal, cutting conduction losses significantly.
+            </p>
+            <table class="spec-table">
+              <tr><td>Timeline</td><td>March 2026 – April 2026</td></tr>
+              <tr><td>Result</td><td>5V → 12V, ~66% efficiency</td></tr>
+              <tr><td>Control</td><td>PWM, closed-loop voltage feedback, Arduino/ATtiny</td></tr>
+              <tr><td>Tools</td><td>KiCad, LTspice, soldering</td></tr>
+            </table>
+            <div class="card-links">
+              <a href="https://www.youtube.com/watch?v=zFqyGcPRrz8" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+            </div>
+          </div>
+          <div class="card-media-col">
             <img src="images/boost-converter.jpg" alt="Boost converter PCB">
           </div>
-        </div>
-        <div class="card-links">
-          <a href="https://www.youtube.com/watch?v=zFqyGcPRrz8" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
@@ -499,18 +528,20 @@
         </div>
       </div>
       <div class="card-body">
-        <p>Designed and built a remote-controlled car around a microcontroller, programming motor control, steering, and wireless communication in the Arduino IDE, and using CAD plus 3D printing to design a custom chassis for mounting the electronics.</p>
-        <table class="spec-table">
-          <tr><td>Timeline</td><td>August 2025 – September 2025</td></tr>
-          <tr><td>Stack</td><td>Arduino IDE, C++, CAD, 3D printing</td></tr>
-        </table>
-        <div class="media-row">
-          <div class="media-slot">
+        <div class="card-split">
+          <div>
+            <p>Designed and built a remote-controlled car around a microcontroller, programming motor control, steering, and wireless communication in the Arduino IDE, and using CAD plus 3D printing to design a custom chassis for mounting the electronics.</p>
+            <table class="spec-table">
+              <tr><td>Timeline</td><td>August 2025 – September 2025</td></tr>
+              <tr><td>Stack</td><td>Arduino IDE, C++, CAD, 3D printing</td></tr>
+            </table>
+            <div class="card-links">
+              <a href="https://www.youtube.com/shorts/5oEjbVs83oo" target="_blank" rel="noopener">Watch demo on YouTube →</a>
+            </div>
+          </div>
+          <div class="card-media-col">
             <img src="images/rc-car.jpg" alt="Arduino remote control car">
           </div>
-        </div>
-        <div class="card-links">
-          <a href="https://www.youtube.com/shorts/5oEjbVs83oo" target="_blank" rel="noopener">Watch demo on YouTube →</a>
         </div>
       </div>
     </div>
