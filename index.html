@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 <style>
   :root{
     --bg:#ece8db;
@@ -321,24 +320,28 @@
     opacity:0.9;
   }
 
-  /* ===== 3D BOARD VIEWER ===== */
-  .board-viewer{margin-top:24px;}
-  .board-viewer .media-caption{
-    text-transform:none; letter-spacing:0.02em; margin-top:0; margin-bottom:2px;
+  /* ===== BOARD PHOTOS (front / back) ===== */
+  .board-photos{margin-top:24px;}
+  .board-photos + .board-photos{margin-top:32px;}
+  .board-photos .media-caption{
+    text-transform:none; letter-spacing:0.02em; margin-top:0; margin-bottom:10px;
     font-size:12.5px; color:var(--text);
   }
-  .board-viewer .viewer-hint{
-    font-family:'Space Mono', monospace; font-size:11px; color:var(--muted);
-    letter-spacing:0.03em; margin:0 0 10px;
+  .board-photos .photo-pair{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
   }
-  .board-viewer model-viewer{
-    width:100%; height:420px;
-    background:#1a1a1a;
-    border:1.5px solid var(--line);
-    --poster-color:transparent;
+  .board-photos .photo-pair.single{grid-template-columns:minmax(0, 420px);}
+  .board-photos figure{margin:0;}
+  .board-photos img{
+    width:100%; height:auto; display:block;
+    border:1.5px solid var(--line); background:var(--bg-alt);
+  }
+  .board-photos figcaption{
+    font-family:'Space Mono', monospace; font-size:11px; color:var(--muted);
+    letter-spacing:0.08em; text-transform:uppercase; margin-top:6px;
   }
   @media (max-width:640px){
-    .board-viewer model-viewer{height:300px;}
+    .board-photos .photo-pair{grid-template-columns:1fr;}
   }
 
   /* ===== SKILLS / PARTS TRAY ===== */
@@ -434,33 +437,27 @@
           <tr><td>Simulation</td><td>LTspice — battery charge/discharge modeling, failure point analysis</td></tr>
           <tr><td>Test</td><td>DMM, vendor test software, radio hardware validation</td></tr>
         </table>
-        <div class="board-viewer">
-          <div class="media-caption">Power Distribution and Battery Monitoring board I designed!</div>
-          <p class="viewer-hint">Click and drag to rotate it. Scroll or pinch to zoom.</p>
-          <model-viewer
-            src="board.glb"
-            alt="3D model of my power distribution and battery monitoring PCB"
-            camera-controls
-            auto-rotate
-            shadow-intensity="1"
-            exposure="1"
-            environment-image="neutral"
-            loading="eager">
-          </model-viewer>
+        <div class="board-photos">
+          <div class="media-caption">Four Layer, Double Sided Power Distribution and Battery Monitoring board I designed!</div>
+          <div class="photo-pair">
+            <figure>
+              <img src="images/power-board-front.jpg" alt="Power distribution and battery monitoring PCB, top layer">
+              <figcaption>Top layer</figcaption>
+            </figure>
+            <figure>
+              <img src="images/power-board-back.jpg" alt="Power distribution and battery monitoring PCB, bottom layer">
+              <figcaption>Bottom layer</figcaption>
+            </figure>
+          </div>
         </div>
-        <div class="board-viewer">
-          <div class="media-caption">Simplistic Power Distribution board I designed!</div>
-          <p class="viewer-hint">Click and drag to rotate it. Scroll or pinch to zoom.</p>
-          <model-viewer
-            src="simple-board.glb"
-            alt="3D model of my simplistic power distribution PCB"
-            camera-controls
-            auto-rotate
-            shadow-intensity="1"
-            exposure="1"
-            environment-image="neutral"
-            loading="lazy">
-          </model-viewer>
+        <div class="board-photos">
+          <div class="media-caption">Two Layer, Single Side Simplistic Power Distribution board I designed!</div>
+          <div class="photo-pair single">
+            <figure>
+              <img src="images/simple-board-top.jpg" alt="Simplistic power distribution PCB, top layer">
+              <figcaption>Top layer</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </div>
