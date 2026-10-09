@@ -18,6 +18,7 @@
     --text:#211f18;
     --muted:#615c4d;
     --danger:#b23a24;
+    --linkedin:#0a66c2;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -117,11 +118,52 @@
     display:flex; flex-direction:column; gap:8px;
     font-family:'Space Mono', monospace;
     font-size:13px;
-    min-width:190px;
+    width:200px;
   }
   .tb-links a{color:var(--text);}
   .tb-links a:hover{color:var(--trace);}
   .tb-links .lbl{color:var(--muted); font-size:11px; letter-spacing:0.05em;}
+
+  /* LinkedIn link with icon */
+  .li-link{display:inline-flex; align-items:center; gap:6px;}
+  .li-icon{width:15px; height:15px; flex-shrink:0; color:var(--linkedin);}
+
+  /* Resume preview */
+  .resume-preview{margin-top:6px;}
+  .resume-frame{
+    position:relative;
+    width:100%;
+    max-width:220px;
+    aspect-ratio:8.5 / 11;
+    margin-top:4px;
+    border:1.5px solid var(--line);
+    background:var(--bg-card);
+    overflow:hidden;
+    transition:border-color .15s ease;
+  }
+  .resume-frame:hover, .resume-frame:focus-within{border-color:var(--trace);}
+  .resume-frame .fallback{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; color:var(--muted); text-align:center; padding:12px;
+  }
+  .resume-frame iframe{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    border:0;
+    background:var(--bg-card);
+    pointer-events:none;
+  }
+  .resume-frame .overlay{
+    position:absolute; inset:0;
+    z-index:1;
+  }
+  .resume-open{display:inline-block; margin-top:6px; font-size:12px;}
+  .tb-links .resume-open{color:var(--trace);}
+
+  @media (max-width:640px){
+    .tb-links{width:100%;}
+  }
 
   .tb-fields{
     display:grid;
@@ -383,9 +425,21 @@
   footer .rev{margin-top:24px; color:var(--muted); font-size:11px; font-family:'Space Mono', monospace;}
 
   ::selection{background:var(--copper); color:var(--bg);}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .resume-frame{transition:none;}
+  }
 </style>
 </head>
 <body>
+
+<!-- Reusable LinkedIn icon -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="icon-linkedin" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>
+  </symbol>
+</svg>
 
 <div class="sheet">
 
@@ -406,9 +460,21 @@
       <div class="tb-links">
         <div><span class="lbl">EMAIL</span><br><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
         <div><span class="lbl">PHONE</span><br><span>(626) 347-0378</span></div>
-        <div><span class="lbl">LINKEDIN</span><br><a href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">linkedin.com/in/andrew-liu</a></div>
-        <div><span class="lbl">LINKS</span><br><a href="https://linktr.ee/andrewliu0116" target="_blank" rel="noopener">linktr.ee/andrewliu0116</a></div>
-        <div><span class="lbl">RESUME</span><br><a href="resume.pdf" target="_blank" rel="noopener">Download PDF</a></div>
+        <div><span class="lbl">LINKEDIN</span><br>
+          <a class="li-link" href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">
+            <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+            linkedin.com/in/andrew-liu
+          </a>
+        </div>
+        <div class="resume-preview">
+          <span class="lbl">RESUME</span>
+          <div class="resume-frame">
+            <div class="fallback">Resume preview</div>
+            <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Resume preview" tabindex="-1" loading="lazy" aria-hidden="true"></iframe>
+            <a class="overlay" href="resume.pdf" target="_blank" rel="noopener" aria-label="Open resume PDF in a new tab"></a>
+          </div>
+          <a class="resume-open" href="resume.pdf" target="_blank" rel="noopener">Open full PDF</a>
+        </div>
       </div>
     </div>
     <div class="tb-fields">
@@ -475,7 +541,8 @@
           <div>
             <p>Lead electrical decisions for the team's avionics stack, from designing data acquisition systems to coordinating sensor and component testing. Write up design decisions and testing protocols so the team has a clear reference to build from.</p>
             <table class="spec-table">
-              <tr><td>Role</td><td>Team Lead, January 2026 – Present</td></tr>
+              <tr><td>Team Lead</td><td>June 2026 – Present</td></tr>
+              <tr><td>Team Member</td><td>January 2026 – June 2026</td></tr>
             </table>
           </div>
           <div class="card-media-col">
@@ -636,8 +703,10 @@
     <div class="lbl">Let's talk</div>
     <div class="links">
       <a href="mailto:andrewliu0116@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://linktr.ee/andrewliu0116" target="_blank" rel="noopener">Linktree</a>
+      <a class="li-link" href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">
+        <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+        LinkedIn
+      </a>
     </div>
   </footer>
 
