@@ -115,10 +115,14 @@
   .tb-name-row{display:flex; gap:20px; align-items:flex-start;}
 
   .tb-links{
-    display:flex; flex-direction:column; gap:8px;
+    flex:1 1 100%;
+    display:flex; align-items:flex-start; gap:40px;
     font-family:'Space Mono', monospace;
     font-size:13px;
-    width:200px;
+  }
+  .tb-contact{
+    display:flex; flex-direction:column; gap:12px;
+    flex:0 0 auto;
   }
   .tb-links a{color:var(--text);}
   .tb-links a:hover{color:var(--trace);}
@@ -129,11 +133,16 @@
   .li-icon{width:15px; height:15px; flex-shrink:0; color:var(--linkedin);}
 
   /* Resume preview */
-  .resume-preview{margin-top:6px;}
+  .resume-preview{
+    flex:1 1 auto; min-width:0;
+    display:flex; flex-direction:column; align-items:flex-end;
+    padding-right:8%;
+  }
+  .resume-preview > *{width:100%; max-width:340px;}
   .resume-frame{
     position:relative;
     width:100%;
-    max-width:220px;
+    max-width:340px;
     aspect-ratio:8.5 / 11;
     margin-top:4px;
     border:1.5px solid var(--line);
@@ -162,7 +171,8 @@
   .tb-links .resume-open{color:var(--trace);}
 
   @media (max-width:640px){
-    .tb-links{width:100%;}
+    .tb-links{flex-direction:column; gap:20px;}
+    .resume-preview{flex:none; width:100%; align-items:flex-start;}
   }
 
   .tb-fields{
@@ -458,6 +468,7 @@
         </div>
       </div>
       <div class="tb-links">
+        <div class="tb-contact">
         <div><span class="lbl">EMAIL</span><br><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
         <div><span class="lbl">PHONE</span><br><span>(626) 347-0378</span></div>
         <div><span class="lbl">LINKEDIN</span><br>
@@ -465,6 +476,7 @@
             <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
             linkedin.com/in/andrew-liu
           </a>
+        </div>
         </div>
         <div class="resume-preview">
           <span class="lbl">RESUME</span>
