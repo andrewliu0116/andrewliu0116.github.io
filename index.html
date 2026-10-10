@@ -440,6 +440,36 @@
     html{scroll-behavior:auto;}
     .resume-frame{transition:none;}
   }
+
+  /* ===== PRINT / SAVE AS PDF ===== */
+  @page{size:letter; margin:0.5in;}
+  @media print{
+    html, body{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    body{background-attachment:scroll; background-image:none; background:#fff;}
+    .sheet{max-width:none; padding:0;}
+
+    /* Clipping containers cut content at page edges: let them overflow */
+    .card, .media-slot, .headshot, .resume-frame{overflow:visible !important;}
+    .card{position:static;}
+    .stamp{display:none;}
+
+    /* Embedded PDF viewer can't print and can break Chrome's print layout */
+    .resume-frame{display:none !important;}
+    .resume-open::after{content:" (andrewliu0116.github.io/resume.pdf)"; color:var(--muted);}
+
+    /* Long cards may span pages, but keep pieces of them intact */
+    .card-head, .spec-table tr, figure, .board-photos, .media-row,
+    .media-slot, .card-media-col img, .tb-top, .tb-fields{
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .card-head, h2, h3, .section-head, .media-caption{break-after:avoid; page-break-after:avoid;}
+    .card{margin-bottom:18px;}
+    img{max-width:100% !important;}
+
+    /* Narrower page: tighten the side column so nothing runs off the right */
+    .card-split{grid-template-columns:1fr 220px; gap:20px;}
+    header.titleblock, footer{margin:0 0 20px;}
+  }
 </style>
 </head>
 <body>
