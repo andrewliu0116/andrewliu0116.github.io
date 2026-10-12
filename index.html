@@ -306,7 +306,8 @@
   @media (max-width:700px){
     .card-split{grid-template-columns:1fr;}
   }
-  .card-media-col img{
+  .card-media-col img,
+  .card-media-col video{
     width:100%;
     height:auto;
     display:block;
@@ -314,7 +315,8 @@
     background:var(--bg-alt);
   }
   .card-media-col .media-caption{margin-top:0;}
-  .card-media-col img + .media-caption{margin-top:20px;}
+  .card-media-col img + .media-caption,
+  .card-media-col video + .media-caption{margin-top:20px;}
 
   .media-slot{
     border:1.5px dashed var(--line);
@@ -590,6 +592,10 @@
           <div class="card-media-col">
             <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Hot-Fire Sensor Logger Perfboard I created!</div>
             <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
+            <div class="media-caption">Sensor Status LED Test · All Sensors Connected</div>
+            <video src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
+              Your browser doesn't support embedded video.
+            </video>
             <div class="card-links" style="margin-top:12px;">
               <a href="https://docs.google.com/document/d/1_dDK57jYp6JyPipqKexFY7U7fkIQN8tpC9qCIKrkGQA/edit?tab=t.0" target="_blank" rel="noopener">Read the writeup →</a>
             </div>
