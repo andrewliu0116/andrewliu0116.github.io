@@ -307,7 +307,8 @@
     .card-split{grid-template-columns:1fr;}
   }
   .card-media-col img,
-  .card-video{
+  .card-video,
+  .card-graph{
     width:100%;
     height:auto;
     display:block;
@@ -591,6 +592,8 @@
             <video class="card-video" src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
               Your browser doesn't support embedded video.
             </video>
+            <div class="media-caption">Cold Flow Pressure Data</div>
+            <img class="card-graph" src="images/cold-flow-pressure.png" alt="Graph of oxidizer, fuel, and chamber pressure over time during the cold flow test">
           </div>
           <div class="card-media-col">
             <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Hot-Fire Sensor Logger Perfboard I created!</div>
