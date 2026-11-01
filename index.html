@@ -3,25 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#12151C">
+<meta name="theme-color" content="#F6F7F9">
 <title>Andrew Liu — Electrical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#12151C;
-    --bg-card:#181C26;
-    --line:#2A3140;
-    --amber:#F5A524;
-    --text:#F2F4F8;
-    --soft:#B8C0CF;
-    --muted:#8A93A6;
-    --linkedin:#5AA9F0;
+    --bg:#F6F7F9;
+    --bg-card:#FFFFFF;
+    --panel:#D9E4F0;
+    --line:#DDE1E8;
+    --amber:#B45309;
+    --text:#12151C;
+    --soft:#3F485A;
+    --muted:#5B6577;
+    --linkedin:#0A66C2;
     --nav-h:56px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth; scroll-padding-top:var(--nav-h); color-scheme:dark;}
+  html{scroll-behavior:smooth; scroll-padding-top:var(--nav-h); color-scheme:light;}
   body{
     background:var(--bg);
     color:var(--text);
@@ -32,14 +33,14 @@
   a{color:var(--amber); text-decoration:none;}
   a:hover{text-decoration:underline;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
-  ::selection{background:var(--amber); color:var(--bg);}
+  ::selection{background:var(--amber); color:#fff;}
   .sheet{max-width:920px; margin:0 auto; padding:0 24px;}
 
   /* ===== TOP TABS ===== */
   .topnav{
     position:sticky; top:0; z-index:50;
     height:var(--nav-h);
-    background:rgba(18,21,28,.92);
+    background:rgba(246,247,249,.94);
     -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
@@ -68,69 +69,76 @@
   @media (max-width:560px){
     .topnav-inner{padding:0 8px;}
     .wordmark{display:none;}
-    .tabs{width:100%; justify-content:space-between; gap:0;}
-    .tabs a{padding:0 10px; font-size:12px;}
+    .tabs{width:100%; justify-content:space-between; gap:0; overflow-x:auto; scrollbar-width:none;}
+    .tabs::-webkit-scrollbar{display:none;}
+    .tabs a{padding:0 8px; font-size:12px; white-space:nowrap;}
   }
 
-  /* ===== HERO ===== */
+  /* ===== HERO: photo left, about me right ===== */
   .hero{
-    position:relative; overflow:hidden;
     min-height:calc(100vh - var(--nav-h));
-    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
-    text-align:center;
-    padding:0 24px 28px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:40px 24px 28px;
     border-bottom:1px solid var(--line);
   }
   @supports (height:100svh){
     .hero{min-height:calc(100svh - var(--nav-h));}
   }
-  .hero .cutout{
-    position:absolute; z-index:1;
-    left:50%; bottom:0; transform:translateX(-50%);
-    height:90%; max-width:100%; width:auto;
-    object-fit:contain; object-position:center bottom;
-    display:block;
+  .hero-inner{
+    width:100%; max-width:960px;
+    display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 6fr);
+    gap:56px; align-items:center;
   }
-  .hero-text{position:relative; z-index:2; margin-bottom:20px;}
-  /* text sits over the photo: a dark halo keeps it readable on any part of it */
-  .hero h1, .hero .role{
-    -webkit-text-stroke:7px var(--bg);
-    paint-order:stroke fill;
-    text-shadow:0 0 14px var(--bg), 0 0 28px var(--bg);
+  /* the photo is shown at a modest size so it stays sharp */
+  .portrait{
+    position:relative; width:100%; max-width:380px; justify-self:center;
+    aspect-ratio:5 / 6;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
   }
-  .hero h1{
+  .portrait .cutout{
+    position:absolute; left:0; bottom:0;
+    width:100%; height:auto; display:block;
+  }
+  .about h1{
     font-family:'Space Mono', monospace;
-    font-size:clamp(34px, 7.5vw, 72px);
-    letter-spacing:-0.03em;
-    line-height:1.08;
-    font-weight:700;
-    color:var(--text);
+    font-size:clamp(34px, 5.2vw, 56px);
+    letter-spacing:-0.03em; line-height:1.08; font-weight:700;
   }
-  .hero .role{
+  .about .role{
     margin-top:10px;
     font-family:'Space Mono', monospace;
-    font-size:clamp(16px, 2.8vw, 24px);
-    color:var(--amber);
-    font-weight:700;
+    font-size:clamp(16px, 2.2vw, 21px);
+    color:var(--amber); font-weight:700;
   }
+  .about .tagline{color:var(--soft); max-width:46ch; margin-top:24px; font-size:16px;}
+  .about .process-chain{
+    font-family:'Space Mono', monospace;
+    font-size:clamp(11px, 1.6vw, 13px);
+    margin-top:12px; color:var(--text);
+  }
+  .facts{
+    margin-top:28px; max-width:360px;
+    border-top:1px solid var(--line);
+    font-family:'Space Mono', monospace; font-size:13px;
+  }
+  .facts div{display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-bottom:1px solid var(--line);}
+  .facts dt{color:var(--muted);}
+  .facts dd{color:var(--text); text-align:right;}
   .scroll-cue{
-    position:relative; z-index:2;
+    margin-top:32px;
     display:inline-flex; flex-direction:column; align-items:center; gap:2px;
-    font-family:'Space Mono', monospace; font-size:12px;
-    color:var(--text);
-    text-shadow:0 0 8px var(--bg);
+    font-family:'Space Mono', monospace; font-size:12px; color:var(--muted);
   }
   .scroll-cue:hover{color:var(--amber); text-decoration:none;}
   .scroll-cue svg{width:18px; height:18px;}
-
-  /* ===== INTRO ===== */
-  .intro{padding:56px 0 0;}
-  .intro .tagline{color:var(--soft); max-width:56ch; font-size:15.5px;}
-  .intro .process-chain{
-    font-family:'Space Mono', monospace;
-    font-size:clamp(11px, 1.9vw, 13px);
-    margin-top:10px;
-    color:var(--text);
+  @media (max-width:760px){
+    .hero{justify-content:flex-start; padding-top:32px;}
+    .hero-inner{grid-template-columns:1fr; gap:32px;}
+    .portrait{max-width:300px;}
+    .about{text-align:left;}
   }
 
   /* ===== SECTIONS ===== */
@@ -193,10 +201,16 @@
   .card-media-col img, .card-video, .card-graph{
     width:100%; height:auto; display:block;
     border:1px solid var(--line); border-radius:2px;
-    background:var(--bg);
+    background:#fff;
   }
   .card-media-col .media-caption{margin-top:0;}
   .photo-slot{margin-top:20px;}
+  .photo-slot [hidden]{display:none !important;}
+  .slot-missing{
+    border:1px dashed var(--line); border-radius:2px;
+    padding:28px 14px; text-align:center;
+    font-family:'Space Mono', monospace; font-size:12px; color:var(--muted);
+  }
   .card-media-col img + .media-caption{margin-top:20px;}
 
   .spec-table{
@@ -211,7 +225,6 @@
 
   .card-links{margin-top:20px; display:flex; gap:20px; font-family:'Space Mono', monospace; font-size:13px;}
 
-  /* board photos (front / back) */
   .board-photos{margin-top:24px;}
   .board-photos + .board-photos{margin-top:32px;}
   .board-photos .media-caption{margin-top:0; margin-bottom:10px; font-size:13px; color:var(--text);}
@@ -220,79 +233,72 @@
   .board-photos figure{margin:0;}
   .board-photos img{
     width:100%; height:auto; display:block;
-    border:1px solid var(--line); border-radius:2px; background:var(--bg);
+    border:1px solid var(--line); border-radius:2px; background:#fff;
   }
   .board-photos figcaption{
     font-family:'Space Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;
   }
   @media (max-width:640px){ .board-photos .photo-pair{grid-template-columns:1fr;} }
 
+  /* ===== RESUME ===== */
+  .resume-actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px;}
+  .btn{
+    display:inline-block;
+    font-family:'Space Mono', monospace; font-size:13px;
+    padding:9px 16px; border-radius:3px;
+    border:1px solid var(--amber); color:var(--amber); background:transparent;
+  }
+  .btn:hover{text-decoration:none; background:rgba(180,83,9,.08);}
+  .btn.primary{background:var(--amber); color:#fff;}
+  .btn.primary:hover{background:#9a4608;}
+  .resume-viewer{
+    border:1px solid var(--line); border-radius:4px; background:#fff;
+    height:min(82vh, 920px); min-height:520px; overflow:hidden;
+    margin-bottom:24px;
+  }
+  .resume-viewer iframe{display:block; width:100%; height:100%; border:0; background:#fff;}
+
   /* ===== CONTACT ===== */
   .contact-card{
     border:1px solid var(--line); background:var(--bg-card); border-radius:4px;
     margin-bottom:96px; overflow:hidden;
   }
-  .contact-main{
-    display:grid; grid-template-columns:1fr 340px; gap:32px;
-    padding:32px; border-bottom:1px solid var(--line);
+  .contact-main{padding:32px;}
+  .contact-list{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px;
+    font-family:'Space Mono', monospace; font-size:14px;
   }
-  .contact-list{display:flex; flex-direction:column; gap:20px; font-family:'Space Mono', monospace; font-size:14px;}
-  .contact-list .lbl, .resume-col .lbl{display:block; font-size:12px; color:var(--muted); margin-bottom:2px;}
+  .contact-list .lbl{display:block; font-size:12px; color:var(--muted); margin-bottom:2px;}
   .contact-list span.val{color:var(--text);}
   .li-link{display:inline-flex; align-items:center; gap:6px;}
   .li-icon{width:15px; height:15px; flex-shrink:0; color:var(--linkedin);}
-  .resume-col{font-family:'Space Mono', monospace;}
-  .resume-frame{
-    position:relative; width:100%; aspect-ratio:8.5 / 11; margin-top:4px;
-    border:1px solid var(--line); background:#fff; overflow:hidden;
-    transition:border-color .15s ease;
-  }
-  .resume-frame:hover, .resume-frame:focus-within{border-color:var(--amber);}
-  .resume-frame .fallback{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-size:11px; color:#555; text-align:center; padding:12px;
-  }
-  .resume-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; background:#fff; pointer-events:none;}
-  .resume-frame .overlay{position:absolute; inset:0; z-index:1;}
-  .resume-open{display:inline-block; margin-top:8px; font-size:13px;}
-  .contact-fields{display:grid; grid-template-columns:repeat(2, 1fr); font-family:'Space Mono', monospace;}
-  .contact-field{padding:14px 32px; border-right:1px solid var(--line);}
-  .contact-field:last-child{border-right:none;}
-  .contact-field .lbl{display:block; font-size:12px; color:var(--muted); margin-bottom:2px;}
-  .contact-field .val{font-size:13px;}
-  @media (max-width:720px){
-    .contact-main{grid-template-columns:1fr; padding:24px;}
-    .contact-field{padding:14px 24px;}
-  }
+  @media (max-width:720px){ .contact-main{padding:24px;} }
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
-    .resume-frame, .tabs a{transition:none;}
+    .tabs a{transition:none;}
   }
 
-  /* ===== PRINT / SAVE AS PDF (flips back to light so it prints on paper) ===== */
+  /* ===== PRINT / SAVE AS PDF ===== */
   @page{size:letter; margin:0.5in;}
   @media print{
-    :root{--bg:#fff; --bg-card:#fff; --line:#cfd3dc; --text:#111; --soft:#333; --muted:#555; --amber:#9a5b00;}
     html, body{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    body{background:#fff;}
     .topnav, .scroll-cue{display:none;}
-    .hero{min-height:0; height:3.4in; padding:0 0 12px; border-bottom:none;}
-    .hero .cutout{height:100%;}
-    .hero h1, .hero .role{-webkit-text-stroke:0; text-shadow:none;}
+    .hero{min-height:0; padding:0 0 16px; border-bottom:none;}
+    .hero-inner{grid-template-columns:2in 1fr; gap:24px;}
     section.block{padding:24px 0 0;}
     .sheet{max-width:none; padding:0;}
-    .card, .resume-frame{overflow:visible !important;}
+    .card{overflow:visible !important;}
     .card{position:static;}
-    .resume-frame{display:none !important;}
-    .resume-open::after{content:" (andrewliu0116.github.io/resume.pdf)"; color:var(--muted);}
-    .card-head, .spec-table tr, figure, .board-photos, .card-media-col img, .contact-main, .contact-fields{
+    .resume-viewer, .resume-actions{display:none !important;}
+    .card-head, .spec-table tr, figure, .board-photos, .card-media-col img, .contact-main{
       break-inside:avoid; page-break-inside:avoid;
     }
     .card-head, h2, h3, .section-head, .media-caption{break-after:avoid; page-break-after:avoid;}
     .card{margin-bottom:18px;}
     img{max-width:100% !important;}
     .card-split{grid-template-columns:1fr 220px; gap:20px;}
-    .contact-main{grid-template-columns:1fr 240px;}
     .contact-card{margin-bottom:0;}
   }
 </style>
@@ -314,18 +320,29 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <header class="hero" id="home">
-  <!-- Transparent cutout of you. Uses images/headshot.png if it exists, otherwise falls back to headshot.jpg -->
-  <img class="cutout" src="images/headshot.png" alt="Andrew Liu"
-       onerror="this.onerror=null; this.src='images/headshot.jpg';">
-  <div class="hero-text">
-    <h1>Hi! I'm Andrew.</h1>
-    <div class="role">Electrical Engineering Student.</div>
+  <div class="hero-inner">
+    <div class="portrait">
+      <!-- Transparent cutout. Uses images/headshot.png if it exists, otherwise falls back to headshot.jpg -->
+      <img class="cutout" src="images/headshot.png" alt="Andrew Liu"
+           onerror="this.onerror=null; this.src='images/headshot.jpg';">
+    </div>
+    <div class="about">
+      <h1>Hi! I'm Andrew.</h1>
+      <div class="role">Electrical Engineering Student.</div>
+      <p class="tagline">EE student at UC Santa Barbara building power electronics, avionic systems, and printed circuit boards. I have gone through multiple full design processes:</p>
+      <div class="process-chain">System Layout → Design → Bench Testing → System Integration.</div>
+      <dl class="facts">
+        <div><dt>School</dt><dd>UCSB · Class of 2028</dd></div>
+        <div><dt>GPA</dt><dd>3.98 / 4.00</dd></div>
+      </dl>
+    </div>
   </div>
   <a class="scroll-cue" href="#experience">
     <span>Scroll down</span>
@@ -335,10 +352,6 @@
 
 <div class="sheet">
 
-  <div class="intro">
-    <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and Printed Circuit Boards. I have gone through multiple full design processes:</p>
-    <div class="process-chain">System Layout → Design → Bench Testing → System Integration.</div>
-  </div>
 
   <section class="block" id="experience">
     <div class="section-head">
@@ -349,7 +362,28 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-01 · POWER ELECTRONICS · HOPLYNK</div>
+          <div class="card-id">SCH-01 · RESEARCH · BIOMIMETIC CIRCUITS &amp; NANOSYSTEMS</div>
+          <h3>Undergraduate Researcher</h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Studying an on-chip low-dropout (LDO) regulator that supplies a clean voltage to a voltage-controlled delay-locked loop. Applied control theory to analyze the regulator's compensation as proportional-derivative feedback, re-deriving its block diagram.</p>
+        <p class="desc-edit">
+          <span class="edit-tag">Currently</span>
+          Learning more about control theory and doing a literature review on other LDOs.
+        </p>
+        <table class="spec-table">
+          <tr><td>Dates</td><td>September 2026 – Present</td></tr>
+          <tr><td>Lab</td><td>Biomimetic Circuits &amp; Nanosystems, UCSB</td></tr>
+          <tr><td>Advisor</td><td>Luke Theogarajan</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-id">SCH-02 · POWER ELECTRONICS · HOPLYNK</div>
           <h3>Electrical Engineering Intern</h3>
         </div>
       </div>
@@ -388,7 +422,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-02 · AVIONICS · GAUCHO ROCKET PROJECT</div>
+          <div class="card-id">SCH-03 · AVIONICS · GAUCHO ROCKET PROJECT</div>
           <h3>Avionics / Electrical Team Lead</h3>
         </div>
       </div>
@@ -410,10 +444,13 @@
           <div class="card-media-col">
             <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Hot-Fire Sensor Logger Perfboard I created!</div>
             <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
-            <!-- Photo slot: save your picture as images/perfboard-pretest.jpg. Stays hidden until the file exists. -->
+            <!-- Photo slot: save your picture as images/perfboard-pretest.jpg (.jpeg, .png and .webp also work) -->
             <div class="photo-slot">
               <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Working on the perfboard right before a test</div>
-              <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test" onerror="this.parentNode.style.display='none';">
+              <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
+                   data-alt="images/perfboard-pretest.jpeg,images/perfboard-pretest.png,images/perfboard-pretest.webp,images/perfboard-pretest.JPG"
+                   onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+              <div class="slot-missing" hidden>Photo not found. Save it as images/perfboard-pretest.jpg next to index.html.</div>
             </div>
             <div class="card-links" style="margin-top:12px;">
               <a href="https://docs.google.com/document/d/1_dDK57jYp6JyPipqKexFY7U7fkIQN8tpC9qCIKrkGQA/edit?tab=t.0" target="_blank" rel="noopener">Read the writeup →</a>
@@ -434,7 +471,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-03 · PCB DESIGN · GAUCHO ROCKET PROJECT</div>
+          <div class="card-id">SCH-04 · PCB DESIGN · GAUCHO ROCKET PROJECT</div>
           <h3>Rocket Flight Sensor Logger PCB</h3>
         </div>
         <span class="badge">V2 In Progress</span>
@@ -471,7 +508,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-04 · POWER ELECTRONICS</div>
+          <div class="card-id">SCH-05 · POWER ELECTRONICS</div>
           <h3>Boost Converter PCB</h3>
         </div>
       </div>
@@ -503,7 +540,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-05 · SOFTWARE · SB HACKATHON</div>
+          <div class="card-id">SCH-06 · SOFTWARE · SB HACKATHON</div>
           <h3>Plantar Fasciitis Risk Screening Website</h3>
         </div>
       </div>
@@ -522,7 +559,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-06 · EMBEDDED SYSTEMS</div>
+          <div class="card-id">SCH-07 · EMBEDDED SYSTEMS</div>
           <h3>Arduino Remote Control Car</h3>
         </div>
       </div>
@@ -548,7 +585,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <div class="card-id">SCH-07 · EMBEDDED SYSTEMS · UCSB</div>
+          <div class="card-id">SCH-08 · EMBEDDED SYSTEMS · UCSB</div>
           <h3>Arduino Rock Paper Scissors Simulator</h3>
         </div>
       </div>
@@ -566,6 +603,21 @@
       </div>
     </div>
 
+  </section>
+
+  <section class="block" id="resume">
+    <div class="section-head">
+      <h2>Resume</h2>
+    </div>
+    <div class="trace-rule"></div>
+
+    <div class="resume-actions">
+      <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Open full PDF</a>
+      <a class="btn" href="resume.pdf" download>Download</a>
+    </div>
+    <div class="resume-viewer">
+      <iframe src="resume.pdf#view=FitH" title="Andrew Liu resume" loading="lazy"></iframe>
+    </div>
   </section>
 
   <section class="block" id="contact">
@@ -586,19 +638,6 @@
             </a>
           </div>
         </div>
-        <div class="resume-col">
-          <span class="lbl">Resume</span>
-          <div class="resume-frame">
-            <div class="fallback">Resume preview</div>
-            <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Resume preview" tabindex="-1" loading="lazy" aria-hidden="true"></iframe>
-            <a class="overlay" href="resume.pdf" target="_blank" rel="noopener" aria-label="Open resume PDF in a new tab"></a>
-          </div>
-          <a class="resume-open" href="resume.pdf" target="_blank" rel="noopener">Open full PDF</a>
-        </div>
-      </div>
-      <div class="contact-fields">
-        <div class="contact-field"><span class="lbl">School</span><span class="val">UCSB · Class of 2028</span></div>
-        <div class="contact-field"><span class="lbl">GPA</span><span class="val">3.98 / 4.00</span></div>
       </div>
     </div>
   </section>
