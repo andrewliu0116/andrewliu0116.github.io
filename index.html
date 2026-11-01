@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F6F7F9">
+<meta name="theme-color" content="#D9E4F0">
 <title>Andrew Liu — Electrical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F6F7F9;
+    --bg:#D9E4F0;
     --bg-card:#FFFFFF;
-    --panel:#D9E4F0;
-    --line:#DDE1E8;
-    --amber:#B45309;
+    --line:#B7C6D8;
+    --amber:#9A4608;
     --text:#12151C;
     --soft:#3F485A;
-    --muted:#5B6577;
+    --muted:#4F5A6D;
     --linkedin:#0A66C2;
     --nav-h:56px;
   }
@@ -40,7 +39,7 @@
   .topnav{
     position:sticky; top:0; z-index:50;
     height:var(--nav-h);
-    background:rgba(246,247,249,.94);
+    background:rgba(217,228,240,.94);
     -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
@@ -93,10 +92,7 @@
   .portrait{
     position:relative; width:100%; max-width:380px; justify-self:center;
     aspect-ratio:5 / 6;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:4px;
-    overflow:hidden;
+    border-bottom:1px solid var(--line);
   }
   .portrait .cutout{
     position:absolute; left:0; bottom:0;
@@ -248,9 +244,9 @@
     padding:9px 16px; border-radius:3px;
     border:1px solid var(--amber); color:var(--amber); background:transparent;
   }
-  .btn:hover{text-decoration:none; background:rgba(180,83,9,.08);}
+  .btn:hover{text-decoration:none; background:rgba(154,70,8,.10);}
   .btn.primary{background:var(--amber); color:#fff;}
-  .btn.primary:hover{background:#9a4608;}
+  .btn.primary:hover{background:#7f3a05;}
   .resume-viewer{
     border:1px solid var(--line); border-radius:4px; background:#fff;
     height:min(82vh, 920px); min-height:520px; overflow:hidden;
