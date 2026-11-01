@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#12151C">
 <title>Andrew Liu — Electrical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ece8db;
-    --bg-alt:#f8f6ef;
-    --bg-card:#ffffff;
-    --line:#cdc9ba;
-    --copper:#bd5f2c;
-    --trace:#1f7a6c;
-    --text:#211f18;
-    --muted:#615c4d;
-    --danger:#b23a24;
-    --linkedin:#0a66c2;
+    --bg:#12151C;
+    --bg-card:#181C26;
+    --line:#2A3140;
+    --amber:#F5A524;
+    --text:#F2F4F8;
+    --soft:#B8C0CF;
+    --muted:#8A93A6;
+    --linkedin:#5AA9F0;
+    --nav-h:56px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top:var(--nav-h); color-scheme:dark;}
   body{
     background:var(--bg);
     color:var(--text);
@@ -29,453 +29,277 @@
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  .mono{font-family:'Space Mono', monospace;}
-  a{color:var(--trace); text-decoration:none;}
+  a{color:var(--amber); text-decoration:none;}
   a:hover{text-decoration:underline;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--trace); outline-offset:3px;}
-
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  ::selection{background:var(--amber); color:var(--bg);}
   .sheet{max-width:920px; margin:0 auto; padding:0 24px;}
 
-  body{
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:40px 40px;
-    background-attachment:fixed;
-    background-position:-1px -1px;
-    opacity:1;
+  /* ===== TOP TABS ===== */
+  .topnav{
+    position:sticky; top:0; z-index:50;
+    height:var(--nav-h);
+    background:rgba(18,21,28,.92);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
   }
-  @media (max-width:640px){
-    body{background-size:28px 28px;}
+  .topnav-inner{
+    max-width:920px; height:100%; margin:0 auto; padding:0 24px;
+    display:flex; align-items:stretch; justify-content:space-between; gap:16px;
+  }
+  .wordmark{
+    display:flex; align-items:center;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:15px;
+    color:var(--text);
+  }
+  .wordmark:hover{text-decoration:none; color:var(--amber);}
+  .tabs{display:flex; align-items:stretch; gap:4px; list-style:none;}
+  .tabs a{
+    display:flex; align-items:center; height:100%;
+    padding:0 14px;
+    font-family:'Space Mono', monospace; font-size:13px;
+    color:var(--muted);
+    border-bottom:3px solid transparent;
+    margin-bottom:-1px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .tabs a:hover{color:var(--text); text-decoration:none;}
+  .tabs a[aria-current="true"]{color:var(--text); border-bottom-color:var(--amber);}
+  @media (max-width:560px){
+    .topnav-inner{padding:0 8px;}
+    .wordmark{display:none;}
+    .tabs{width:100%; justify-content:space-between; gap:0;}
+    .tabs a{padding:0 10px; font-size:12px;}
   }
 
-  /* ===== TITLE BLOCK HERO ===== */
-  header.titleblock{
-    border:1.5px solid var(--line);
-    background:var(--bg-alt);
-    margin:32px auto 40px;
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    min-height:calc(100vh - var(--nav-h));
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+    text-align:center;
+    padding:0 24px 28px;
+    border-bottom:1px solid var(--line);
   }
-  .tb-top{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    padding:36px 32px 28px;
-    border-bottom:1.5px solid var(--line);
-    gap:24px; flex-wrap:wrap;
+  @supports (height:100svh){
+    .hero{min-height:calc(100svh - var(--nav-h));}
   }
-  .greeting{
-    font-size:14.5px;
-    color:var(--copper);
-    font-weight:500;
-    margin-bottom:6px;
+  .hero .cutout{
+    position:absolute; z-index:1;
+    left:50%; bottom:0; transform:translateX(-50%);
+    height:90%; max-width:100%; width:auto;
+    object-fit:contain; object-position:center bottom;
+    display:block;
   }
-  .tb-top h1{
+  .hero-text{position:relative; z-index:2; margin-bottom:20px;}
+  /* text sits over the photo: a dark halo keeps it readable on any part of it */
+  .hero h1, .hero .role{
+    -webkit-text-stroke:7px var(--bg);
+    paint-order:stroke fill;
+    text-shadow:0 0 14px var(--bg), 0 0 28px var(--bg);
+  }
+  .hero h1{
     font-family:'Space Mono', monospace;
-    font-size:clamp(28px, 5vw, 44px);
-    letter-spacing:-0.02em;
+    font-size:clamp(34px, 7.5vw, 72px);
+    letter-spacing:-0.03em;
+    line-height:1.08;
+    font-weight:700;
+    color:var(--text);
+  }
+  .hero .role{
+    margin-top:10px;
+    font-family:'Space Mono', monospace;
+    font-size:clamp(16px, 2.8vw, 24px);
+    color:var(--amber);
     font-weight:700;
   }
-  .tb-top .role{
-    color:var(--copper);
-    font-family:'Space Mono', monospace;
-    font-size:14px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    margin-top:8px;
+  .scroll-cue{
+    position:relative; z-index:2;
+    display:inline-flex; flex-direction:column; align-items:center; gap:2px;
+    font-family:'Space Mono', monospace; font-size:12px;
+    color:var(--text);
+    text-shadow:0 0 8px var(--bg);
   }
-  .tb-top .tagline{
-    color:var(--muted);
-    max-width:44ch;
-    margin-top:14px;
-    font-size:15px;
-  }
-  .process-chain{
+  .scroll-cue:hover{color:var(--amber); text-decoration:none;}
+  .scroll-cue svg{width:18px; height:18px;}
+
+  /* ===== INTRO ===== */
+  .intro{padding:56px 0 0;}
+  .intro .tagline{color:var(--soft); max-width:56ch; font-size:15.5px;}
+  .intro .process-chain{
     font-family:'Space Mono', monospace;
     font-size:clamp(11px, 1.9vw, 13px);
+    margin-top:10px;
     color:var(--text);
-    letter-spacing:0.01em;
-    white-space:nowrap;
-    margin-top:8px;
-  }
-  .headshot{
-    width:150px; height:150px;
-    border:1.5px solid var(--line);
-    background:var(--bg-card);
-    flex-shrink:0;
-    overflow:hidden;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .headshot img{width:100%; height:100%; object-fit:cover; display:block;}
-  .headshot .placeholder-txt{
-    font-family:'Space Mono', monospace;
-    font-size:10px; color:var(--muted); text-align:center; padding:8px;
-    letter-spacing:0.03em;
-  }
-  @media (max-width:640px){
-    .headshot{width:100px; height:100px;}
-  }
-  .tb-name-row{display:flex; gap:20px; align-items:flex-start;}
-
-  .tb-links{
-    flex:1 1 100%;
-    display:flex; align-items:flex-start; gap:40px;
-    font-family:'Space Mono', monospace;
-    font-size:13px;
-  }
-  .tb-contact{
-    display:flex; flex-direction:column; gap:12px;
-    flex:0 0 auto;
-  }
-  .tb-links a{color:var(--text);}
-  .tb-links a:hover{color:var(--trace);}
-  .tb-links .lbl{color:var(--muted); font-size:11px; letter-spacing:0.05em;}
-
-  /* LinkedIn link with icon */
-  .li-link{display:inline-flex; align-items:center; gap:6px;}
-  .li-icon{width:15px; height:15px; flex-shrink:0; color:var(--linkedin);}
-
-  /* Resume preview */
-  .resume-preview{
-    flex:1 1 auto; min-width:0;
-    display:flex; flex-direction:column; align-items:flex-end;
-    padding-right:8%;
-  }
-  .resume-preview > *{width:100%; max-width:340px;}
-  .resume-frame{
-    position:relative;
-    width:100%;
-    max-width:340px;
-    aspect-ratio:8.5 / 11;
-    margin-top:4px;
-    border:1.5px solid var(--line);
-    background:var(--bg-card);
-    overflow:hidden;
-    transition:border-color .15s ease;
-  }
-  .resume-frame:hover, .resume-frame:focus-within{border-color:var(--trace);}
-  .resume-frame .fallback{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:11px; color:var(--muted); text-align:center; padding:12px;
-  }
-  .resume-frame iframe{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    border:0;
-    background:var(--bg-card);
-    pointer-events:none;
-  }
-  .resume-frame .overlay{
-    position:absolute; inset:0;
-    z-index:1;
-  }
-  .resume-open{display:inline-block; margin-top:6px; font-size:12px;}
-  .tb-links .resume-open{color:var(--trace);}
-
-  @media (max-width:640px){
-    .tb-links{flex-direction:column; gap:20px;}
-    .resume-preview{flex:none; width:100%; align-items:flex-start;}
-  }
-
-  .tb-fields{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-  }
-  .tb-field{
-    padding:14px 18px;
-    border-right:1.5px solid var(--line);
-    font-family:'Space Mono', monospace;
-  }
-  .tb-field:last-child{border-right:none;}
-  .tb-field .lbl{
-    display:block; font-size:10px; letter-spacing:0.1em;
-    color:var(--muted); text-transform:uppercase; margin-bottom:4px;
-  }
-  .tb-field .val{font-size:13px; color:var(--text);}
-  @media (max-width:640px){
-    .tb-fields{grid-template-columns:1fr;}
-    .tb-field{border-right:none; border-bottom:1.5px solid var(--line);}
-    .tb-field:last-child{border-bottom:none;}
   }
 
   /* ===== SECTIONS ===== */
-  section{padding:56px 0;}
-  .section-head{
-    display:flex; align-items:baseline; gap:14px;
-    margin-bottom:28px;
-  }
-  .section-head .tag{
-    font-family:'Space Mono', monospace;
-    font-size:12px; color:var(--copper);
-    border:1px solid var(--copper);
-    padding:3px 8px;
-    letter-spacing:0.05em;
-  }
+  section.block{padding:56px 0 24px; scroll-margin-top:var(--nav-h);}
+  .section-head{margin-bottom:0;}
   .section-head h2{
     font-family:'Space Mono', monospace;
-    font-size:22px;
-    letter-spacing:-0.01em;
+    font-size:26px; letter-spacing:-0.01em; font-weight:700;
   }
-  .trace-rule{
-    height:2px;
-    background:
-      linear-gradient(90deg, var(--line) 0 8px, transparent 8px 12px) repeat-x;
-    background-size:12px 2px;
-    margin:8px 0 40px;
-  }
+  .trace-rule{height:1px; background:var(--line); margin:12px 0 32px;}
 
-  p.lead{color:var(--muted); max-width:60ch; font-size:15.5px;}
-
-  /* ===== PROJECT CARD ===== */
+  /* ===== CARDS ===== */
   .card{
-    border:1.5px solid var(--line);
+    border:1px solid var(--line);
     background:var(--bg-card);
+    border-radius:4px;
     margin-bottom:28px;
     position:relative;
     overflow:hidden;
   }
   .card-head{
     display:flex; justify-content:space-between; align-items:flex-start;
-    padding:24px 28px 0;
-    gap:16px; flex-wrap:wrap;
+    padding:24px 28px 0; gap:16px; flex-wrap:wrap;
   }
   .card-id{
     font-family:'Space Mono', monospace;
-    font-size:12px; color:var(--trace);
-    letter-spacing:0.08em;
+    font-size:12px; color:var(--amber); letter-spacing:0.04em;
   }
-  .card h3{
-    font-size:21px; font-weight:700; margin-top:6px;
-  }
+  .card h3{font-size:21px; font-weight:600; margin-top:6px; color:var(--text);}
   .badge{
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    border:1px solid var(--trace);
-    color:var(--trace);
-    padding:4px 10px;
-    height:fit-content;
-    white-space:nowrap;
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.04em;
+    border:1px solid var(--amber); color:var(--amber);
+    padding:4px 10px; height:fit-content; white-space:nowrap;
   }
   .card-body{padding:16px 28px 28px;}
-  .card-body p{color:var(--muted); font-size:15px; max-width:64ch;}
+  .card-body p{color:var(--soft); font-size:15px; max-width:64ch;}
   .card-body p + p{margin-top:12px;}
 
-  /* editable description marker */
   .desc-edit{
-    border-left:2px solid var(--copper);
+    border-left:2px solid var(--amber);
     padding-left:14px;
     margin-top:14px !important;
   }
   .desc-edit .edit-tag{
     display:block;
-    font-family:'Space Mono', monospace;
-    font-size:10px;
-    color:var(--copper);
-    letter-spacing:0.08em;
-    text-transform:uppercase;
+    font-family:'Space Mono', monospace; font-size:11px;
+    color:var(--amber); letter-spacing:0.04em;
     margin-bottom:4px;
   }
 
-  /* media (image / video) slots */
   .media-caption{
     font-family:'Space Mono', monospace;
-    font-size:11px;
-    color:var(--muted);
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    margin-top:20px;
-    margin-bottom:8px;
-  }
-  .media-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
-  .media-row:has(.media-slot:only-child){
-    grid-template-columns:minmax(0, 340px);
-  }
-  @media (max-width:640px){
-    .media-row{grid-template-columns:1fr;}
+    font-size:12px; color:var(--muted);
+    margin-top:20px; margin-bottom:8px;
   }
   .card-split{
-    display:grid;
-    grid-template-columns:1fr 280px;
-    gap:28px;
-    align-items:start;
+    display:grid; grid-template-columns:1fr 280px; gap:28px; align-items:start;
   }
-  @media (max-width:700px){
-    .card-split{grid-template-columns:1fr;}
-  }
-  .card-media-col img,
-  .card-video,
-  .card-graph{
-    width:100%;
-    height:auto;
-    display:block;
-    border:1.5px solid var(--line);
-    background:var(--bg-alt);
+  @media (max-width:700px){ .card-split{grid-template-columns:1fr;} }
+  .card-media-col img, .card-video, .card-graph{
+    width:100%; height:auto; display:block;
+    border:1px solid var(--line); border-radius:2px;
+    background:var(--bg);
   }
   .card-media-col .media-caption{margin-top:0;}
+  .photo-slot{margin-top:20px;}
   .card-media-col img + .media-caption{margin-top:20px;}
 
-  .media-slot{
-    border:1.5px dashed var(--line);
-    background:var(--bg-alt);
-    aspect-ratio:16/10;
-    display:flex; align-items:center; justify-content:center;
-    overflow:hidden;
-    position:relative;
-  }
-  .media-slot img, .media-slot video{
-    width:100%; height:100%; object-fit:contain; display:block;
-  }
-  .media-slot .placeholder-txt{
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    color:var(--muted);
-    text-align:center;
-    padding:16px;
-    letter-spacing:0.03em;
-  }
-
   .spec-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-    font-family:'Space Mono', monospace;
-    font-size:12.5px;
+    width:100%; border-collapse:collapse; margin-top:20px;
+    font-family:'Space Mono', monospace; font-size:12.5px;
   }
   .spec-table tr{border-top:1px solid var(--line);}
   .spec-table tr:first-child{border-top:none;}
   .spec-table td{padding:8px 0; vertical-align:top;}
-  .spec-table td:first-child{
-    color:var(--muted); width:130px; letter-spacing:0.04em; text-transform:uppercase; font-size:11px; padding-top:10px;
-  }
+  .spec-table td:first-child{color:var(--muted); width:130px; padding-top:8px;}
   .spec-table td:last-child{color:var(--text);}
 
   .card-links{margin-top:20px; display:flex; gap:20px; font-family:'Space Mono', monospace; font-size:13px;}
 
-  /* redacted / NDA card treatment */
-  .card.redacted .card-body p.blur-line{
-    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 10px);
-    height:11px; border-radius:2px; margin:8px 0;
-  }
-  .stamp{
-    position:absolute;
-    top:22px; right:-38px;
-    background:transparent;
-    border:2.5px solid var(--danger);
-    color:var(--danger);
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:0.12em;
-    padding:5px 44px;
-    transform:rotate(8deg);
-    opacity:0.9;
-  }
-
-  /* ===== BOARD PHOTOS (front / back) ===== */
+  /* board photos (front / back) */
   .board-photos{margin-top:24px;}
   .board-photos + .board-photos{margin-top:32px;}
-  .board-photos .media-caption{
-    text-transform:none; letter-spacing:0.02em; margin-top:0; margin-bottom:10px;
-    font-size:12.5px; color:var(--text);
-  }
-  .board-photos .photo-pair{
-    display:grid; grid-template-columns:1fr 1fr; gap:14px;
-  }
+  .board-photos .media-caption{margin-top:0; margin-bottom:10px; font-size:13px; color:var(--text);}
+  .board-photos .photo-pair{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
   .board-photos .photo-pair.single{grid-template-columns:minmax(0, 420px);}
   .board-photos figure{margin:0;}
   .board-photos img{
     width:100%; height:auto; display:block;
-    border:1.5px solid var(--line); background:var(--bg-alt);
+    border:1px solid var(--line); border-radius:2px; background:var(--bg);
   }
   .board-photos figcaption{
-    font-family:'Space Mono', monospace; font-size:11px; color:var(--muted);
-    letter-spacing:0.08em; text-transform:uppercase; margin-top:6px;
+    font-family:'Space Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;
   }
-  @media (max-width:640px){
-    .board-photos .photo-pair{grid-template-columns:1fr;}
-  }
+  @media (max-width:640px){ .board-photos .photo-pair{grid-template-columns:1fr;} }
 
-  /* ===== SKILLS / PARTS TRAY ===== */
-  .tray-group{margin-bottom:24px;}
-  .tray-group .lbl{
-    font-family:'Space Mono', monospace;
-    font-size:11px; color:var(--muted);
-    text-transform:uppercase; letter-spacing:0.08em;
-    margin-bottom:10px; display:block;
+  /* ===== CONTACT ===== */
+  .contact-card{
+    border:1px solid var(--line); background:var(--bg-card); border-radius:4px;
+    margin-bottom:96px; overflow:hidden;
   }
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    border:1px solid var(--line);
-    background:var(--bg-alt);
-    padding:6px 12px;
-    font-family:'Space Mono', monospace;
-    font-size:12.5px;
-    color:var(--text);
+  .contact-main{
+    display:grid; grid-template-columns:1fr 340px; gap:32px;
+    padding:32px; border-bottom:1px solid var(--line);
   }
-
-  /* ===== FOOTER TITLE BLOCK ===== */
-  footer{
-    border:1.5px solid var(--line);
-    background:var(--bg-alt);
-    margin:40px auto 60px;
-    padding:32px;
-    text-align:center;
+  .contact-list{display:flex; flex-direction:column; gap:20px; font-family:'Space Mono', monospace; font-size:14px;}
+  .contact-list .lbl, .resume-col .lbl{display:block; font-size:12px; color:var(--muted); margin-bottom:2px;}
+  .contact-list span.val{color:var(--text);}
+  .li-link{display:inline-flex; align-items:center; gap:6px;}
+  .li-icon{width:15px; height:15px; flex-shrink:0; color:var(--linkedin);}
+  .resume-col{font-family:'Space Mono', monospace;}
+  .resume-frame{
+    position:relative; width:100%; aspect-ratio:8.5 / 11; margin-top:4px;
+    border:1px solid var(--line); background:#fff; overflow:hidden;
+    transition:border-color .15s ease;
   }
-  footer .lbl{
-    font-family:'Space Mono', monospace; font-size:11px;
-    color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;
-    margin-bottom:12px;
+  .resume-frame:hover, .resume-frame:focus-within{border-color:var(--amber);}
+  .resume-frame .fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:11px; color:#555; text-align:center; padding:12px;
   }
-  footer .links{
-    display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
-    font-family:'Space Mono', monospace; font-size:14px;
+  .resume-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; background:#fff; pointer-events:none;}
+  .resume-frame .overlay{position:absolute; inset:0; z-index:1;}
+  .resume-open{display:inline-block; margin-top:8px; font-size:13px;}
+  .contact-fields{display:grid; grid-template-columns:repeat(2, 1fr); font-family:'Space Mono', monospace;}
+  .contact-field{padding:14px 32px; border-right:1px solid var(--line);}
+  .contact-field:last-child{border-right:none;}
+  .contact-field .lbl{display:block; font-size:12px; color:var(--muted); margin-bottom:2px;}
+  .contact-field .val{font-size:13px;}
+  @media (max-width:720px){
+    .contact-main{grid-template-columns:1fr; padding:24px;}
+    .contact-field{padding:14px 24px;}
   }
-  footer .rev{margin-top:24px; color:var(--muted); font-size:11px; font-family:'Space Mono', monospace;}
-
-  ::selection{background:var(--copper); color:var(--bg);}
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
-    .resume-frame{transition:none;}
+    .resume-frame, .tabs a{transition:none;}
   }
 
-  /* ===== PRINT / SAVE AS PDF ===== */
+  /* ===== PRINT / SAVE AS PDF (flips back to light so it prints on paper) ===== */
   @page{size:letter; margin:0.5in;}
   @media print{
+    :root{--bg:#fff; --bg-card:#fff; --line:#cfd3dc; --text:#111; --soft:#333; --muted:#555; --amber:#9a5b00;}
     html, body{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
-    body{background-attachment:scroll; background-image:none; background:#fff;}
+    .topnav, .scroll-cue{display:none;}
+    .hero{min-height:0; height:3.4in; padding:0 0 12px; border-bottom:none;}
+    .hero .cutout{height:100%;}
+    .hero h1, .hero .role{-webkit-text-stroke:0; text-shadow:none;}
+    section.block{padding:24px 0 0;}
     .sheet{max-width:none; padding:0;}
-
-    /* Clipping containers cut content at page edges: let them overflow */
-    .card, .media-slot, .headshot, .resume-frame{overflow:visible !important;}
+    .card, .resume-frame{overflow:visible !important;}
     .card{position:static;}
-    .stamp{display:none;}
-
-    /* Embedded PDF viewer can't print and can break Chrome's print layout */
     .resume-frame{display:none !important;}
     .resume-open::after{content:" (andrewliu0116.github.io/resume.pdf)"; color:var(--muted);}
-
-    /* Long cards may span pages, but keep pieces of them intact */
-    .card-head, .spec-table tr, figure, .board-photos, .media-row,
-    .media-slot, .card-media-col img, .tb-top, .tb-fields{
+    .card-head, .spec-table tr, figure, .board-photos, .card-media-col img, .contact-main, .contact-fields{
       break-inside:avoid; page-break-inside:avoid;
     }
     .card-head, h2, h3, .section-head, .media-caption{break-after:avoid; page-break-after:avoid;}
     .card{margin-bottom:18px;}
     img{max-width:100% !important;}
-
-    /* Narrower page: tighten the side column so nothing runs off the right */
     .card-split{grid-template-columns:1fr 220px; gap:20px;}
-    header.titleblock, footer{margin:0 0 20px;}
+    .contact-main{grid-template-columns:1fr 240px;}
+    .contact-card{margin-bottom:0;}
   }
 </style>
 </head>
 <body>
 
+<!-- Reusable LinkedIn icon -->
 <!-- Reusable LinkedIn icon -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="icon-linkedin" viewBox="0 0 24 24">
@@ -483,53 +307,41 @@
   </symbol>
 </svg>
 
+<nav class="topnav" aria-label="Main">
+  <div class="topnav-inner">
+    <a class="wordmark" href="#home">Andrew Liu</a>
+    <ul class="tabs">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <!-- Transparent cutout of you. Uses images/headshot.png if it exists, otherwise falls back to headshot.jpg -->
+  <img class="cutout" src="images/headshot.png" alt="Andrew Liu"
+       onerror="this.onerror=null; this.src='images/headshot.jpg';">
+  <div class="hero-text">
+    <h1>Hi! I'm Andrew.</h1>
+    <div class="role">Electrical Engineering Student.</div>
+  </div>
+  <a class="scroll-cue" href="#experience">
+    <span>Scroll down</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
+</header>
+
 <div class="sheet">
 
-  <header class="titleblock">
-    <div class="tb-top">
-      <div class="tb-name-row">
-        <div class="headshot">
-          <img src="images/headshot.jpg" alt="Andrew Liu">
-        </div>
-        <div>
-          <div class="greeting">Hi, thanks for stopping by 👋</div>
-          <h1>Andrew Liu</h1>
-          <div class="role">Electrical Engineering · Power Electronics and PCB Design</div>
-          <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and Printed Circuit Boards. I have gone through multiple full design processes:</p>
-          <div class="process-chain">System Layout → Design → Bench Testing → System Integration.</div>
-        </div>
-      </div>
-      <div class="tb-links">
-        <div class="tb-contact">
-        <div><span class="lbl">EMAIL</span><br><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
-        <div><span class="lbl">PHONE</span><br><span>(626) 347-0378</span></div>
-        <div><span class="lbl">LINKEDIN</span><br>
-          <a class="li-link" href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">
-            <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
-            linkedin.com/in/andrew-liu
-          </a>
-        </div>
-        </div>
-        <div class="resume-preview">
-          <span class="lbl">RESUME</span>
-          <div class="resume-frame">
-            <div class="fallback">Resume preview</div>
-            <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Resume preview" tabindex="-1" loading="lazy" aria-hidden="true"></iframe>
-            <a class="overlay" href="resume.pdf" target="_blank" rel="noopener" aria-label="Open resume PDF in a new tab"></a>
-          </div>
-          <a class="resume-open" href="resume.pdf" target="_blank" rel="noopener">Open full PDF</a>
-        </div>
-      </div>
-    </div>
-    <div class="tb-fields">
-      <div class="tb-field"><span class="lbl">School</span><span class="val">UCSB · Class of 2028</span></div>
-      <div class="tb-field"><span class="lbl">GPA</span><span class="val">3.98 / 4.00</span></div>
-    </div>
-  </header>
+  <div class="intro">
+    <p class="tagline">EE student at UC Santa Barbara building power electronics, avionics, and Printed Circuit Boards. I have gone through multiple full design processes:</p>
+    <div class="process-chain">System Layout → Design → Bench Testing → System Integration.</div>
+  </div>
 
-  <section id="projects">
+  <section class="block" id="experience">
     <div class="section-head">
-      <span class="tag">01</span>
       <h2>Experience</h2>
     </div>
     <div class="trace-rule"></div>
@@ -598,6 +410,11 @@
           <div class="card-media-col">
             <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Hot-Fire Sensor Logger Perfboard I created!</div>
             <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
+            <!-- Photo slot: save your picture as images/perfboard-pretest.jpg. Stays hidden until the file exists. -->
+            <div class="photo-slot">
+              <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Working on the perfboard right before a test</div>
+              <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test" onerror="this.parentNode.style.display='none';">
+            </div>
             <div class="card-links" style="margin-top:12px;">
               <a href="https://docs.google.com/document/d/1_dDK57jYp6JyPipqKexFY7U7fkIQN8tpC9qCIKrkGQA/edit?tab=t.0" target="_blank" rel="noopener">Read the writeup →</a>
             </div>
@@ -606,8 +423,10 @@
       </div>
     </div>
 
-    <div class="section-head" style="margin-top:8px;">
-      <span class="tag">02</span>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="section-head">
       <h2>Projects</h2>
     </div>
     <div class="trace-rule"></div>
@@ -749,18 +568,75 @@
 
   </section>
 
-  <footer>
-    <div class="lbl">Let's talk</div>
-    <div class="links">
-      <a href="mailto:andrewliu0116@gmail.com">Email</a>
-      <a class="li-link" href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">
-        <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
-        LinkedIn
-      </a>
+  <section class="block" id="contact">
+    <div class="section-head">
+      <h2>Contact</h2>
     </div>
-  </footer>
+    <div class="trace-rule"></div>
+
+    <div class="contact-card">
+      <div class="contact-main">
+        <div class="contact-list">
+          <div><span class="lbl">Email</span><a href="mailto:andrewliu0116@gmail.com">andrewliu0116@gmail.com</a></div>
+          <div><span class="lbl">Phone</span><span class="val">(626) 347-0378</span></div>
+          <div><span class="lbl">LinkedIn</span>
+            <a class="li-link" href="https://www.linkedin.com/in/andrew-liu-71896134a/" target="_blank" rel="noopener">
+              <svg class="li-icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+              linkedin.com/in/andrew-liu
+            </a>
+          </div>
+        </div>
+        <div class="resume-col">
+          <span class="lbl">Resume</span>
+          <div class="resume-frame">
+            <div class="fallback">Resume preview</div>
+            <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Resume preview" tabindex="-1" loading="lazy" aria-hidden="true"></iframe>
+            <a class="overlay" href="resume.pdf" target="_blank" rel="noopener" aria-label="Open resume PDF in a new tab"></a>
+          </div>
+          <a class="resume-open" href="resume.pdf" target="_blank" rel="noopener">Open full PDF</a>
+        </div>
+      </div>
+      <div class="contact-fields">
+        <div class="contact-field"><span class="lbl">School</span><span class="val">UCSB · Class of 2028</span></div>
+        <div class="contact-field"><span class="lbl">GPA</span><span class="val">3.98 / 4.00</span></div>
+      </div>
+    </div>
+  </section>
 
 </div>
+
+<script>
+  // Highlight the tab for the section currently on screen
+  (function(){
+    var nav = document.querySelector('.topnav');
+    var links = [].slice.call(document.querySelectorAll('.tabs a'));
+    var sections = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+    var queued = false;
+
+    function update(){
+      queued = false;
+      var line = nav.offsetHeight + Math.round(window.innerHeight * 0.3);
+      var current = 0;
+      for (var i = 0; i < sections.length; i++){
+        if (sections[i].getBoundingClientRect().top <= line) current = i;
+      }
+      // Short last section: light up Contact once the page bottoms out
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections.length - 1;
+      }
+      links.forEach(function(a, i){
+        if (i === current) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    function onScroll(){
+      if (!queued){ queued = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+</script>
 
 </body>
 </html>
