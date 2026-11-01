@@ -84,15 +84,17 @@
     .hero{min-height:calc(100svh - var(--nav-h));}
   }
   .hero-inner{
-    width:100%; max-width:960px;
-    display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 6fr);
+    width:100%; max-width:1040px;
+    display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
     gap:56px; align-items:center;
   }
   /* the photo is shown at a modest size so it stays sharp */
   .portrait{
-    position:relative; width:100%; max-width:380px; justify-self:center;
+    position:relative; width:100%; max-width:480px; justify-self:center;
     aspect-ratio:5 / 6;
-    border-bottom:1px solid var(--line);
+    border:2px solid var(--amber);
+    border-radius:4px;
+    overflow:hidden;
   }
   .portrait .cutout{
     position:absolute; left:0; bottom:0;
@@ -133,7 +135,7 @@
   @media (max-width:760px){
     .hero{justify-content:flex-start; padding-top:32px;}
     .hero-inner{grid-template-columns:1fr; gap:32px;}
-    .portrait{max-width:300px;}
+    .portrait{max-width:340px;}
     .about{text-align:left;}
   }
 
@@ -468,20 +470,20 @@
       <div class="card-head">
         <div>
           <div class="card-id">SCH-04 · PCB DESIGN · GAUCHO ROCKET PROJECT</div>
-          <h3>Rocket Flight Sensor Logger PCB</h3>
+          <h3>Sensor Data Logger PCB</h3>
         </div>
-        <span class="badge">V2 In Progress</span>
+        <span class="badge">V2 Ordered!</span>
       </div>
       <div class="card-body">
         <div class="card-split">
           <div>
-            <p>Designed a 4-layer PCB in KiCad to log temperature, pressure, and acceleration data during rocket flight, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier — on breakout boards before committing to the layout.</p>
+            <p>Designed a 4-layer PCB in KiCad to log temperature and pressure, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier and pressure transducer protection circuitry — on breakout boards before committing to the layout. This is one of up to three flexible boards used for current and future rockets.</p>
             <p class="desc-edit">
               <span class="edit-tag">Updates</span>
-              Currently building V2 to optimize the design and add live telemetry calculation and streaming capabilities.
+              V2 is ordered! It optimizes the design and adds 2x UART and up to 11x SPI to allow future sensors/boards to connect to this board.
             </p>
             <table class="spec-table">
-              <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in progress</td></tr>
+              <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 ordered</td></tr>
               <tr><td>Tools</td><td>KiCad, DMM, Soldering Iron</td></tr>
             </table>
             <div class="card-links">
