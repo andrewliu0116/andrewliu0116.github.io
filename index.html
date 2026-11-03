@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D9E4F0">
+<meta name="theme-color" content="#E5E7EA">
 <title>Andrew Liu — Electrical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#D9E4F0;
+    --bg:#E5E7EA;
     --bg-card:#FFFFFF;
-    --line:#B7C6D8;
-    --amber:#9A4608;
-    --text:#12151C;
-    --soft:#3F485A;
-    --muted:#4F5A6D;
+    --line:#C3C7CD;
+    --accent:#1F4FD1;
+    --text:#16171A;
+    --soft:#454750;
+    --muted:#5A5C66;
     --linkedin:#0A66C2;
     --nav-h:56px;
   }
@@ -29,17 +29,17 @@
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  a{color:var(--amber); text-decoration:none;}
+  a{color:var(--accent); text-decoration:none;}
   a:hover{text-decoration:underline;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
-  ::selection{background:var(--amber); color:#fff;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  ::selection{background:var(--accent); color:#fff;}
   .sheet{max-width:920px; margin:0 auto; padding:0 24px;}
 
   /* ===== TOP TABS ===== */
   .topnav{
     position:sticky; top:0; z-index:50;
     height:var(--nav-h);
-    background:rgba(217,228,240,.94);
+    background:rgba(229,231,234,.94);
     -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
@@ -52,7 +52,7 @@
     font-family:'Space Mono', monospace; font-weight:700; font-size:15px;
     color:var(--text);
   }
-  .wordmark:hover{text-decoration:none; color:var(--amber);}
+  .wordmark:hover{text-decoration:none; color:var(--accent);}
   .tabs{display:flex; align-items:stretch; gap:4px; list-style:none;}
   .tabs a{
     display:flex; align-items:center; height:100%;
@@ -64,7 +64,7 @@
     transition:color .15s ease, border-color .15s ease;
   }
   .tabs a:hover{color:var(--text); text-decoration:none;}
-  .tabs a[aria-current="true"]{color:var(--text); border-bottom-color:var(--amber);}
+  .tabs a[aria-current="true"]{color:var(--text); border-bottom-color:var(--accent);}
   @media (max-width:560px){
     .topnav-inner{padding:0 8px;}
     .wordmark{display:none;}
@@ -92,7 +92,7 @@
   .portrait{
     position:relative; width:100%; max-width:480px; justify-self:center;
     aspect-ratio:5 / 6;
-    border:2px solid var(--amber);
+    border:2px solid var(--accent);
     border-radius:4px;
     overflow:hidden;
   }
@@ -109,7 +109,7 @@
     margin-top:10px;
     font-family:'Space Mono', monospace;
     font-size:clamp(16px, 2.2vw, 21px);
-    color:var(--amber); font-weight:700;
+    color:var(--accent); font-weight:700;
   }
   .about .tagline{color:var(--soft); max-width:46ch; margin-top:24px; font-size:16px;}
   .about .process-chain{
@@ -130,7 +130,7 @@
     display:inline-flex; flex-direction:column; align-items:center; gap:2px;
     font-family:'Space Mono', monospace; font-size:12px; color:var(--muted);
   }
-  .scroll-cue:hover{color:var(--amber); text-decoration:none;}
+  .scroll-cue:hover{color:var(--accent); text-decoration:none;}
   .scroll-cue svg{width:18px; height:18px;}
   @media (max-width:760px){
     .hero{justify-content:flex-start; padding-top:32px;}
@@ -163,12 +163,12 @@
   }
   .card-id{
     font-family:'Space Mono', monospace;
-    font-size:12px; color:var(--amber); letter-spacing:0.04em;
+    font-size:12px; color:var(--accent); letter-spacing:0.04em;
   }
   .card h3{font-size:21px; font-weight:600; margin-top:6px; color:var(--text);}
   .badge{
     font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.04em;
-    border:1px solid var(--amber); color:var(--amber);
+    border:1px solid var(--accent); color:var(--accent);
     padding:4px 10px; height:fit-content; white-space:nowrap;
   }
   .card-body{padding:16px 28px 28px;}
@@ -176,14 +176,14 @@
   .card-body p + p{margin-top:12px;}
 
   .desc-edit{
-    border-left:2px solid var(--amber);
+    border-left:2px solid var(--accent);
     padding-left:14px;
     margin-top:14px !important;
   }
   .desc-edit .edit-tag{
     display:block;
     font-family:'Space Mono', monospace; font-size:11px;
-    color:var(--amber); letter-spacing:0.04em;
+    color:var(--accent); letter-spacing:0.04em;
     margin-bottom:4px;
   }
 
@@ -244,11 +244,11 @@
     display:inline-block;
     font-family:'Space Mono', monospace; font-size:13px;
     padding:9px 16px; border-radius:3px;
-    border:1px solid var(--amber); color:var(--amber); background:transparent;
+    border:1px solid var(--accent); color:var(--accent); background:transparent;
   }
-  .btn:hover{text-decoration:none; background:rgba(154,70,8,.10);}
-  .btn.primary{background:var(--amber); color:#fff;}
-  .btn.primary:hover{background:#7f3a05;}
+  .btn:hover{text-decoration:none; background:rgba(31,79,209,.10);}
+  .btn.primary{background:var(--accent); color:#fff;}
+  .btn.primary:hover{background:#173CA8;}
   .resume-viewer{
     border:1px solid var(--line); border-radius:4px; background:#fff;
     height:min(82vh, 920px); min-height:520px; overflow:hidden;
