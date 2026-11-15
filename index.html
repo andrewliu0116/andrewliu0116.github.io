@@ -472,7 +472,7 @@
           <div class="card-id">SCH-04 · PCB DESIGN · GAUCHO ROCKET PROJECT</div>
           <h3>Sensor Data Logger PCB</h3>
         </div>
-        <span class="badge">V2 Ordered!</span>
+        <span class="badge">V2 In Testing</span>
       </div>
       <div class="card-body">
         <div class="card-split">
@@ -480,11 +480,12 @@
             <p>Designed a 4-layer PCB in KiCad to log temperature and pressure, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier and pressure transducer protection circuitry — on breakout boards before committing to the layout. This is one of up to three flexible boards used for current and future rockets.</p>
             <p class="desc-edit">
               <span class="edit-tag">Updates</span>
-              V2 is ordered! It optimizes the design and adds 2x UART and up to 11x SPI to allow future sensors/boards to connect to this board.
+              V2 is here! It optimizes the design and adds 2x UART and up to 11x SPI to allow future sensors/boards to connect to this board. SD card writes, thermocouple reading, pressure transducer reading, UART, SWD, and SPI are all working. Next up: testing the board on the upcoming hotfire test.
             </p>
             <table class="spec-table">
-              <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 ordered</td></tr>
-              <tr><td>Tools</td><td>KiCad, DMM, Soldering Iron</td></tr>
+              <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in bench testing</td></tr>
+              <tr><td>Verified</td><td>SD card write, thermocouple, pressure transducer, UART, SWD, SPI</td></tr>
+              <tr><td>Tools</td><td>KiCad, DMM</td></tr>
             </table>
           </div>
           <div class="card-media-col">
@@ -492,6 +493,14 @@
             <img src="images/sensor-logger.jpg" alt="Rocket flight sensor logger PCB, V1">
             <div class="media-caption">V2 · Latest Design</div>
             <img src="images/sensor-logger-v2.jpg" alt="Rocket flight sensor logger PCB, V2 design">
+            <!-- Photo slot: save your picture as images/sensor-logger-v2-testing.jpg (.jpeg, .png and .webp also work) -->
+            <div class="photo-slot">
+              <div class="media-caption">Testing data logging with thermocouple</div>
+              <img src="images/sensor-logger-v2-testing.jpg" alt="Assembled V2 sensor logger board logging thermocouple data during bench testing"
+                   data-alt="images/sensor-logger-v2-testing.jpeg,images/sensor-logger-v2-testing.png,images/sensor-logger-v2-testing.webp,images/sensor-logger-v2-testing.JPG"
+                   onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+              <div class="slot-missing" hidden>Photo not found. Save it as images/sensor-logger-v2-testing.jpg next to index.html.</div>
+            </div>
             <div class="card-links" style="margin-top:12px; flex-wrap:wrap;">
               <a href="https://github.com/Gaucho-Rocket-Project/Hotfire-Board" target="_blank" rel="noopener">V2 GitHub repo →</a>
               <!-- Drag your PDF into the documents folder and name it sensor-logger-v2-writeup.pdf -->
