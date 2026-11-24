@@ -238,6 +238,49 @@
   }
   @media (max-width:640px){ .board-photos .photo-pair{grid-template-columns:1fr;} }
 
+  /* ===== ROADMAP ===== */
+  .roadmap{list-style:none; margin-top:32px;}
+  .roadmap-step{position:relative; padding-left:40px; padding-bottom:36px;}
+  .roadmap-step:last-child{padding-bottom:0;}
+  /* connecting trace between nodes */
+  .roadmap-step::before{
+    content:""; position:absolute; left:8px; top:22px; bottom:-4px;
+    width:2px; background:var(--accent); opacity:.35;
+  }
+  .roadmap-step:last-child::before{display:none;}
+  /* node */
+  .roadmap-step::after{
+    content:""; position:absolute; left:0; top:3px;
+    width:18px; height:18px; border-radius:50%;
+    border:2px solid var(--accent); background:#fff;
+  }
+  .roadmap-step.latest::after{background:var(--accent); box-shadow:0 0 0 4px rgba(31,79,209,.15);}
+  .step-tag{
+    font-family:'Space Mono', monospace; font-size:11px;
+    color:var(--accent); letter-spacing:0.04em;
+  }
+  .roadmap-step h4{font-size:17px; font-weight:600; margin-top:2px; color:var(--text);}
+  .roadmap-step > p{color:var(--soft); font-size:15px; max-width:64ch; margin-top:6px;}
+  .step-media{
+    margin-top:16px;
+    display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; align-items:start;
+  }
+  .step-media.single{grid-template-columns:minmax(0, 460px);}
+  .step-media figure{margin:0;}
+  .step-media .photo-slot{margin-top:0;}
+  .step-media img, .step-media video{
+    width:100%; height:auto; display:block;
+    border:1px solid var(--line); border-radius:2px; background:#fff;
+  }
+  .step-media figcaption{
+    font-family:'Space Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;
+  }
+  .step-media .wide{grid-column:1 / -1;}
+  @media (max-width:640px){
+    .roadmap-step{padding-left:32px;}
+    .step-media{grid-template-columns:1fr;}
+  }
+
   /* ===== RESUME ===== */
   .resume-actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px;}
   .btn{
@@ -425,36 +468,97 @@
         </div>
       </div>
       <div class="card-body">
-        <div class="card-split">
-          <div>
-            <p>Lead electrical decisions for the team's avionics stack, from designing data acquisition systems to coordinating sensor and component testing. Write up design decisions and testing protocols so the team has a clear reference to build from.</p>
-            <table class="spec-table">
-              <tr><td>Team Lead</td><td>June 2026 – Present</td></tr>
-              <tr><td>Team Member</td><td>January 2026 – June 2026</td></tr>
-            </table>
-            <div class="media-caption">Sensor Status LED Test · All Sensors Connected</div>
-            <video class="card-video" src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
-              Your browser doesn't support embedded video.
-            </video>
-            <div class="media-caption">Cold Flow Pressure Data</div>
-            <img class="card-graph" src="images/cold-flow-pressure.png" alt="Graph of oxidizer, fuel, and chamber pressure over time during the cold flow test">
-          </div>
-          <div class="card-media-col">
-            <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Hot-Fire Sensor Logger Perfboard I created!</div>
-            <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
-            <!-- Photo slot: save your picture as images/perfboard-pretest.jpg (.jpeg, .png and .webp also work) -->
-            <div class="photo-slot">
-              <div class="media-caption" style="text-transform:none; letter-spacing:0.02em;">Working on the perfboard right before a test</div>
-              <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
-                   data-alt="images/perfboard-pretest.jpeg,images/perfboard-pretest.png,images/perfboard-pretest.webp,images/perfboard-pretest.JPG"
-                   onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
-              <div class="slot-missing" hidden>Photo not found. Save it as images/perfboard-pretest.jpg next to index.html.</div>
-            </div>
-            <div class="card-links" style="margin-top:12px;">
-              <a href="https://docs.google.com/document/d/1_dDK57jYp6JyPipqKexFY7U7fkIQN8tpC9qCIKrkGQA/edit?tab=t.0" target="_blank" rel="noopener">Read the writeup →</a>
-            </div>
-          </div>
+        <p>Lead electrical decisions for the team's avionics stack, from designing data acquisition systems to coordinating sensor and component testing. Write up design decisions and testing protocols so the team has a clear reference to build from.</p>
+        <table class="spec-table">
+          <tr><td>Team Lead</td><td>June 2026 – Present</td></tr>
+          <tr><td>Team Member</td><td>January 2026 – June 2026</td></tr>
+        </table>
+        <div class="card-links">
+          <a href="https://docs.google.com/document/d/1_dDK57jYp6JyPipqKexFY7U7fkIQN8tpC9qCIKrkGQA/edit?tab=t.0" target="_blank" rel="noopener">Read the writeup →</a>
         </div>
+
+        <!-- ===== Data acquisition roadmap ===== -->
+        <div class="media-caption" style="margin-top:32px; color:var(--text); font-size:13px;">Data Acquisition Roadmap</div>
+        <ol class="roadmap">
+
+          <!-- STAGE 01: perfboard + cold flow data -->
+          <li class="roadmap-step">
+            <div class="step-tag">STAGE 01 · PERFBOARD PROTOTYPE</div>
+            <h4>Hot-Fire Sensor Logger Perfboard</h4>
+            <p>Hand-built a perfboard logger to read the team's pressure sensors, and used it to capture oxidizer, fuel, and chamber pressure during cold flow.</p>
+            <div class="step-media">
+              <figure>
+                <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
+                <figcaption>The perfboard logger I created</figcaption>
+              </figure>
+              <figure>
+                <img src="images/cold-flow-pressure.png" alt="Graph of oxidizer, fuel, and chamber pressure over time during the cold flow test">
+                <figcaption>Cold flow pressure data from the perfboard</figcaption>
+              </figure>
+              <!-- Photo slot: save your picture as images/perfboard-pretest.jpg (.jpeg, .png and .webp also work) -->
+              <figure class="photo-slot">
+                <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
+                     data-alt="images/perfboard-pretest.jpeg,images/perfboard-pretest.png,images/perfboard-pretest.webp,images/perfboard-pretest.JPG"
+                     onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+                <div class="slot-missing" hidden>Photo not found. Save it as images/perfboard-pretest.jpg next to index.html.</div>
+                <figcaption>Working on the perfboard right before a test</figcaption>
+              </figure>
+              <figure>
+                <video src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
+                  Your browser doesn't support embedded video.
+                </video>
+                <figcaption>Sensor status LED test · all sensors connected</figcaption>
+              </figure>
+            </div>
+          </li>
+
+          <!-- STAGE 02: PCB bench testing for propulsion calculations -->
+          <li class="roadmap-step">
+            <div class="step-tag">STAGE 02 · PCB BENCH TESTING</div>
+            <h4>Testing the PCB for Propulsion Calculations</h4>
+            <p>Moved the logger onto a custom PCB (<a href="#sensor-logger">Sensor Data Logger PCB ↓</a>) and tested it on the bench to collect the data needed for the team's propulsion calculations.</p>
+            <div class="step-media single">
+              <!-- Photo slot: save your picture as images/pcb-propulsion-test.jpg (.jpeg, .png and .webp also work) -->
+              <figure class="photo-slot">
+                <img src="images/pcb-propulsion-test.jpg" alt="Sensor logger PCB being tested to collect data for propulsion calculations"
+                     data-alt="images/pcb-propulsion-test.jpeg,images/pcb-propulsion-test.png,images/pcb-propulsion-test.webp,images/pcb-propulsion-test.JPG"
+                     onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+                <div class="slot-missing" hidden>Photo not found. Save it as images/pcb-propulsion-test.jpg next to index.html.</div>
+                <figcaption>PCB under test for propulsion calculations</figcaption>
+              </figure>
+            </div>
+          </li>
+
+          <!-- STAGE 03: PCB used during cold flow -->
+          <li class="roadmap-step latest">
+            <div class="step-tag">STAGE 03 · COLD FLOW</div>
+            <h4>PCB in Use During Cold Flow</h4>
+            <p>Ran the PCB on the test stand during cold flow, replacing the perfboard as the team's data logger.</p>
+            <p class="desc-edit">
+              <span class="edit-tag">Built for modularity</span>
+              I was asked to add an accelerometer only a few days before the tests. Because the board was designed to be modular, with spare UART and SPI connections, I was able to add it quickly without redesigning the board.
+            </p>
+            <div class="step-media">
+              <!-- Photo slot: save your picture as images/pcb-cold-flow.jpg (.jpeg, .png and .webp also work) -->
+              <figure class="photo-slot">
+                <img src="images/pcb-cold-flow.jpg" alt="DAQ box before cold flow tests"
+                     data-alt="images/pcb-cold-flow.jpeg,images/pcb-cold-flow.png,images/pcb-cold-flow.webp,images/pcb-cold-flow.JPG"
+                     onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+                <div class="slot-missing" hidden>Photo not found. Save it as images/pcb-cold-flow.jpg next to index.html.</div>
+                <figcaption>DAQ box before cold flow tests</figcaption>
+              </figure>
+              <!-- Photo slot: save your graph as images/pcb-cold-flow-data.png (.jpg, .jpeg and .webp also work) -->
+              <figure class="photo-slot">
+                <img src="images/pcb-cold-flow-data.png" alt="Graph of pressure data logged by the PCB during cold flow"
+                     data-alt="images/pcb-cold-flow-data.jpg,images/pcb-cold-flow-data.jpeg,images/pcb-cold-flow-data.webp,images/pcb-cold-flow-data.PNG,images/pcb-cold-flow-data.JPG"
+                     onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
+                <div class="slot-missing" hidden>Graph not found. Save it as images/pcb-cold-flow-data.png next to index.html.</div>
+                <figcaption>Cold flow data from the PCB</figcaption>
+              </figure>
+            </div>
+          </li>
+
+        </ol>
       </div>
     </div>
 
@@ -466,7 +570,7 @@
     </div>
     <div class="trace-rule"></div>
 
-    <div class="card">
+    <div class="card" id="sensor-logger" style="scroll-margin-top:var(--nav-h);">
       <div class="card-head">
         <div>
           <div class="card-id">SCH-04 · PCB DESIGN · GAUCHO ROCKET PROJECT</div>
