@@ -276,6 +276,8 @@
     font-family:'Space Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;
   }
   .step-media .wide{grid-column:1 / -1;}
+  /* photos in the same row share one size so their tops and bottoms line up */
+  .step-media img.match{aspect-ratio:4 / 3; object-fit:cover; object-position:center;}
   @media (max-width:640px){
     .roadmap-step{padding-left:32px;}
     .step-media{grid-template-columns:1fr;}
@@ -488,12 +490,12 @@
             <p>Hand-built a perfboard logger to read the team's pressure sensors, and used it to capture oxidizer, fuel, and chamber pressure during cold flow.</p>
             <div class="step-media">
               <figure>
-                <img src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
+                <img class="match" src="images/hotfire-logger.jpg" alt="Hot-fire sensor logger perfboard">
                 <figcaption>The perfboard logger I created</figcaption>
               </figure>
               <!-- Photo slot: save your picture as images/perfboard-pretest.jpg (.jpeg, .png and .webp also work) -->
               <figure class="photo-slot">
-                <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
+                <img class="match" src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
                      data-alt="images/perfboard-pretest.jpeg,images/perfboard-pretest.png,images/perfboard-pretest.webp,images/perfboard-pretest.JPG"
                      onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
                 <div class="slot-missing" hidden>Photo not found. Save it as images/perfboard-pretest.jpg next to index.html.</div>
