@@ -495,6 +495,12 @@
                 <img src="images/cold-flow-pressure.png" alt="Graph of oxidizer, fuel, and chamber pressure over time during the cold flow test">
                 <figcaption>Cold flow pressure data from the perfboard</figcaption>
               </figure>
+              <figure>
+                <video src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
+                  Your browser doesn't support embedded video.
+                </video>
+                <figcaption>Sensor status LED test · all sensors connected</figcaption>
+              </figure>
               <!-- Photo slot: save your picture as images/perfboard-pretest.jpg (.jpeg, .png and .webp also work) -->
               <figure class="photo-slot">
                 <img src="images/perfboard-pretest.jpg" alt="Andrew working on the perfboard right before a rocket test"
@@ -502,12 +508,6 @@
                      onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
                 <div class="slot-missing" hidden>Photo not found. Save it as images/perfboard-pretest.jpg next to index.html.</div>
                 <figcaption>Working on the perfboard right before a test</figcaption>
-              </figure>
-              <figure>
-                <video src="videos/sensor-status-led-test.mp4" controls muted playsinline preload="metadata" aria-label="Testing the sensor status LED with all sensors plugged in">
-                  Your browser doesn't support embedded video.
-                </video>
-                <figcaption>Sensor status LED test · all sensors connected</figcaption>
               </figure>
             </div>
           </li>
@@ -549,11 +549,11 @@
               </figure>
               <!-- Photo slot: save your graph as images/pcb-cold-flow-data.png (.jpg, .jpeg and .webp also work) -->
               <figure class="photo-slot">
-                <img src="images/pcb-cold-flow-data.png" alt="Graph of pressure data logged by the PCB during cold flow"
+                <img src="images/pcb-cold-flow-data.png" alt="Graph of pressure, temperature, and acceleration (vibration) data logged by the PCB during cold flow"
                      data-alt="images/pcb-cold-flow-data.jpg,images/pcb-cold-flow-data.jpeg,images/pcb-cold-flow-data.webp,images/pcb-cold-flow-data.PNG,images/pcb-cold-flow-data.JPG"
                      onerror="var f=(this.dataset.alt||'').split(',').filter(Boolean); if(f.length){this.dataset.alt=f.slice(1).join(','); this.src=f[0];} else {this.hidden=true; this.nextElementSibling.hidden=false;}">
                 <div class="slot-missing" hidden>Graph not found. Save it as images/pcb-cold-flow-data.png next to index.html.</div>
-                <figcaption>Cold flow data from the PCB</figcaption>
+                <figcaption>Cold flow data from the PCB: pressure, temperature, and acceleration (vibration)</figcaption>
               </figure>
             </div>
           </li>
@@ -584,7 +584,7 @@
             <p>Designed a 4-layer PCB in KiCad to log temperature and pressure, selecting components for size, power draw, and sensor compatibility, and validating key parts — including the thermocouple amplifier and pressure transducer protection circuitry — on breakout boards before committing to the layout. This is one of up to three flexible boards used for current and future rockets.</p>
             <p class="desc-edit">
               <span class="edit-tag">Updates</span>
-              V2 is here! It optimizes the design and adds 2x UART and up to 11x SPI to allow future sensors/boards to connect to this board. SD card writes, thermocouple reading, pressure transducer reading, UART, SWD, and SPI are all working. Next up: testing the board on the upcoming hotfire test.
+              V2 is here and has been field tested! It optimizes the design and adds 2x UART and up to 11x SPI so future sensors and boards can connect to it. The board has now logged data during real tests, with SD card writes, thermocouple reading, pressure transducer reading, UART, SWD, and SPI all working. It also proved its flexibility: when the team needed another SPI sensor, an accelerometer, just days before testing, I was able to add it quickly using the board's spare SPI connections.
             </p>
             <table class="spec-table">
               <tr><td>Timeline</td><td>April 2026 – May 2026 (V1) · V2 in bench testing</td></tr>
